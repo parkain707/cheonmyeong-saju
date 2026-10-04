@@ -232,13 +232,13 @@ class handler(BaseHTTPRequestHandler):
 
                 name1 = p1_raw.get('name', '그대')
                 name2 = p2_raw.get('name', '상대방')
-                gunghap_result = analyze_gunghap(saju1, saju2, name1=name1, name2=name2, relation=relation)
+                gunghap_result = analyze_gunghap(saju1, saju2, relation_type=relation, nameA=name1, nameB=name2)
 
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
                 self.send_cors_headers()
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "success", "gunghap": gunghap_result}, ensure_ascii=False).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "success", "gunghap": gunghap_result, "sajuA": saju1, "sajuB": saju2}, ensure_ascii=False).encode('utf-8'))
             except Exception as ge:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -255,17 +255,17 @@ class handler(BaseHTTPRequestHandler):
                 history = params.get('history', [])
                 person = params.get('person', {})
 
-                py = int(person.get('year', 1993))
-                pm = int(person.get('month', 8))
-                pd = int(person.get('day', 17))
-                ph = int(person.get('hour', 18))
-                pg = person.get('gender', 'male')
-                pname = person.get('name', '질문자')
+                py = int(person.get('year', params.get('year', 1993)))
+                pm = int(person.get('month', params.get('month', 8)))
+                pd = int(person.get('day', params.get('day', 17)))
+                ph = int(person.get('hour', params.get('hour', 18)))
+                pg = person.get('gender', params.get('gender', 'male'))
+                pname = person.get('name', params.get('name', '질문자'))
 
                 saju = calculate_saju(py, pm, pd, ph, gender=pg)
                 ziwei = calculate_ziwei_from_saju(saju)
 
-                qa_resp = generate_shaman_answer(question, mode=mode, history=history, saju_data=saju, ziwei_data=ziwei, name=pname)
+                qa_resp = generate_shaman_answer(saju, ziwei, question, reading_mode=mode, conversation_history=history, name=pname)
 
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
