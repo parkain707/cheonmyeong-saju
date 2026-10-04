@@ -9,14 +9,19 @@
     <meta name="apple-mobile-web-app-title" content="천명명경">
     <link rel="manifest" href="manifest.json">
     <title>天命明鏡 (천명명경) | 2030 천명 신점사주 & 웹툰 시네마틱 뷰</title>
-    <!-- 맑은 고딕 가독성 극대화 스타일 -->
+    <!-- 맑은 고딕 가독성 & 모바일 무결점 줄바꿈 스타일 -->
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            word-break: keep-all;
+            overflow-wrap: anywhere;
+        }
         body, button, input, select, textarea, table, th, td, h1, h2, h3, h4, h5, h6, p, span, div {
             font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif !important;
             letter-spacing: -0.3px;
         }
     </style>
-    <link rel="stylesheet" href="style.css?v=20261001_2300">
+    <link rel="stylesheet" href="style.css?v=20261005_iris_luxury">
 </head>
 <body>
     <!-- 배경 은은한 오로라 & 금빛 파동 효과 -->
@@ -29,23 +34,23 @@
     <div class="app-container">
         <!-- 헤더 -->
         <header class="main-header">
-            <div class="header-badge">동양 정통 비전(秘傳) × 현허도인(玄虛道人)의 천기 혜안</div>
+            <div class="header-badge">동양 정통 비전(秘傳) · 현허도인(玄虛道人) 천기 혜안</div>
             <h1 class="service-title">天命明鏡 <span>천명명경</span></h1>
-            <p class="service-subtitle">동양 정통 명리학 × 샤머니즘 신점 혜안 × 칼 융 심리원형 & 7대 차크라</p>
+            <p class="service-subtitle">동양 정통 명리학 × 샤머니즘 신점 혜안 × 칼 융 심리원형</p>
             
             <!-- 소셜 프루프 뱃지 -->
             <div class="social-proof-bar">
                 <span class="rating-stars">★★★★★ 4.98</span>
-                <span class="proof-text">누적 감명 148,290명 | "가슴에 맺힌 응어리를 꿰뚫어 풀고 나아갈 길을 밝히는 혜안"</span>
+                <span class="proof-text">누적 감명 14.8만명 돌파 · 2030 천명 혜안</span>
             </div>
         </header>
 
         <!-- 메인 내비게이션 3대 탭바 (2030 모던 미니멀 스타일) -->
         <nav class="main-nav-tabs">
             <div class="nav-tab-group">
-                <button type="button" class="nav-tab-btn active" id="tab-btn-saju" data-tab="saju">🔮 사주 운명 진단</button>
+                <button type="button" class="nav-tab-btn active" id="tab-btn-saju" data-tab="saju">🔮 사주 진단</button>
                 <button type="button" class="nav-tab-btn" id="tab-btn-gunghap" data-tab="gunghap">💞 2인 궁합</button>
-                <button type="button" class="nav-tab-btn" id="tab-btn-qa" data-tab="qa">💬 1:1 심층 문답</button>
+                <button type="button" class="nav-tab-btn" id="tab-btn-qa" data-tab="qa">💬 1:1 문답</button>
             </div>
             <button type="button" class="nav-stamp-pill-btn" id="btn-open-stamp" title="출석 도장 찍고 질문권 받기">
                 <span>🎁 출석</span>
@@ -302,9 +307,9 @@
                         <div class="webtoon-action-box">
                             <p class="action-hint">※ 도인의 거울을 터치하면 천명의 문이 열립니다.</p>
                             <button type="button" id="btn-enter-saju-from-inline-webtoon" class="webtoon-touch-cta">
-                                <span class="cta-sparkle">✨</span>
-                                <span class="cta-label">거울 터치하고 내 사주 밝히기</span>
-                                <span class="cta-arrow">👉</span>
+                                <span class="cta-sparkle">🪞</span>
+                                <span class="cta-label">거울 터치하여 천명 개안하기 (開眼)</span>
+                                <span class="cta-arrow">❯</span>
                             </button>
                         </div>
                     </div>

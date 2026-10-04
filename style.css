@@ -30,6 +30,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
 }
 
 body {
@@ -4187,13 +4189,17 @@ textarea:focus {
     }
 }
 
-/* ================================================================
-   모바일 서비스 초최적화 (Mobile-First Optimization & Floating Bar)
-   ================================================================ */
+/* ==========================================================================
+   [Iris Art Direction] 2030 콰이어트 럭셔리 & 모바일 반응형 무결점 마스터 (Iris Master Suite)
+   - 모바일 320px ~ 480px 전 뷰포트 글자 프레임 넘침(Overflow) 100% 원천 차단
+   - 엣지 투 엣지 시네마틱 인터랙티브 웹툰 프레이밍 고도화
+   - 황금비율 세그먼트 컨트롤, 카드 덱, 타로 스펙 그리드
+   ========================================================================== */
 
-/* 1. iOS 사파리 및 인앱 브라우저 100dvh 표준 적용 & 터치 최적화 */
+/* 1. iOS 사파리 & 모바일 브라우저 뷰포트 규격 */
 html {
     height: -webkit-fill-available;
+    overflow-x: hidden;
 }
 
 body {
@@ -4201,10 +4207,541 @@ body {
     min-height: 100dvh;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    overflow-x: hidden;
 }
 
-/* 2. 모바일 입력창 터치 시 화면 자동 줌인 방지 (iOS 16px 룰) */
+/* 2. 모바일 반응형 마스터 오버라이드 (max-width: 768px) */
 @media screen and (max-width: 768px) {
+    /* (1) 컨테이너 및 헤더 */
+    .app-container {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 16px 12px 110px !important;
+        overflow-x: hidden !important;
+    }
+
+    .main-header {
+        margin-bottom: 20px !important;
+        padding-bottom: 16px !important;
+    }
+
+    .header-badge {
+        font-size: 0.72rem !important;
+        padding: 4px 10px !important;
+        letter-spacing: 0.5px !important;
+        white-space: normal !important;
+        line-height: 1.4 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .service-title {
+        font-size: clamp(1.6rem, 5.5vw, 2.2rem) !important;
+        letter-spacing: 1px !important;
+        margin-bottom: 6px !important;
+        line-height: 1.25 !important;
+    }
+
+    .service-title span {
+        font-size: clamp(1rem, 3.8vw, 1.4rem) !important;
+        margin-left: 4px !important;
+    }
+
+    .service-subtitle {
+        font-size: clamp(0.76rem, 2.8vw, 0.88rem) !important;
+        line-height: 1.5 !important;
+        color: #a8a096 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .social-proof-bar {
+        display: inline-flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 4px 8px !important;
+        padding: 5px 12px !important;
+        font-size: 0.74rem !important;
+        border-radius: 14px !important;
+        max-width: 100% !important;
+        line-height: 1.4 !important;
+    }
+
+    .proof-text {
+        font-size: 0.72rem !important;
+    }
+
+    /* (2) 메인 내비게이션 탭바 */
+    .main-nav-tabs {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 4px !important;
+        padding: 4px !important;
+        border-radius: 14px !important;
+        background: rgba(18, 14, 24, 0.95) !important;
+        border: 1px solid rgba(212, 175, 55, 0.25) !important;
+        width: 100% !important;
+        margin-bottom: 18px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .nav-tab-group {
+        display: flex !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        gap: 4px !important;
+    }
+
+    .nav-tab-btn {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+        padding: 9px 4px !important;
+        font-size: clamp(0.74rem, 2.6vw, 0.86rem) !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+        border-radius: 10px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        border: none !important;
+        background: transparent !important;
+        color: #a296b0 !important;
+    }
+
+    .nav-tab-btn.active {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(184, 134, 11, 0.35)) !important;
+        color: #ffd700 !important;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.25) !important;
+    }
+
+    .nav-stamp-pill-btn {
+        flex: 0 0 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        padding: 7px 10px !important;
+        font-size: 0.74rem !important;
+        border-radius: 10px !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(212, 175, 55, 0.2) !important;
+        color: #ded8e6 !important;
+    }
+
+    /* (3) 시네마틱 인터랙티브 웹툰 뷰어 */
+    .webtoon-viewer-section {
+        width: 100% !important;
+        margin-bottom: 22px !important;
+    }
+
+    .webtoon-app-frame {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 18px !important;
+        background: #0a090e !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .webtoon-viewer-header {
+        padding: 12px 14px !important;
+        background: rgba(16, 13, 22, 0.96) !important;
+        gap: 8px !important;
+    }
+
+    .wvh-episode-badge {
+        font-size: 0.64rem !important;
+        padding: 2px 6px !important;
+    }
+
+    .wvh-title {
+        font-size: clamp(0.85rem, 3.2vw, 0.98rem) !important;
+        line-height: 1.3 !important;
+    }
+
+    .wvh-skip-btn {
+        padding: 5px 10px !important;
+        font-size: 0.72rem !important;
+        border-radius: 14px !important;
+    }
+
+    .panel-img-wrap {
+        width: 100% !important;
+        overflow: hidden !important;
+        line-height: 0 !important;
+    }
+
+    .webtoon-real-img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16/10 !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+
+    .panel-narrative {
+        padding: 14px 14px !important;
+        background: #0a090e !important;
+    }
+
+    .nar-time {
+        font-size: 0.68rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .nar-text {
+        font-size: clamp(0.84rem, 3.1vw, 0.92rem) !important;
+        line-height: 1.6 !important;
+        color: #ddd5e4 !important;
+        word-break: keep-all !important;
+    }
+
+    .panel-speech {
+        margin: 10px 12px !important;
+        padding: 12px 14px !important;
+        border-radius: 14px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+        word-break: keep-all !important;
+    }
+
+    .panel-speech.monologue p {
+        font-size: clamp(0.84rem, 3vw, 0.9rem) !important;
+        line-height: 1.55 !important;
+        color: #cfbfdf !important;
+        word-break: keep-all !important;
+    }
+
+    .speaker-tag {
+        font-size: 0.72rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .speech-quote {
+        font-size: clamp(0.88rem, 3.2vw, 0.98rem) !important;
+        line-height: 1.6 !important;
+        word-break: keep-all !important;
+    }
+
+    .webtoon-action-box {
+        padding: 16px 14px 22px !important;
+        background: #0a090e !important;
+    }
+
+    .action-hint {
+        font-size: 0.75rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .webtoon-touch-cta {
+        width: 100% !important;
+        padding: 14px 12px !important;
+        border-radius: 14px !important;
+        font-size: clamp(0.92rem, 3.6vw, 1.05rem) !important;
+        font-weight: 900 !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+        word-break: keep-all !important;
+    }
+
+    /* (4) 사주 입력 폼 (#input-section) */
+    .card-section, .result-block {
+        padding: 18px 12px !important;
+        border-radius: 16px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .intro-box {
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .intro-quote {
+        font-size: clamp(0.85rem, 3.2vw, 0.95rem) !important;
+        margin-bottom: 4px !important;
+        word-break: keep-all !important;
+    }
+
+    .intro-desc {
+        font-size: clamp(0.76rem, 2.8vw, 0.85rem) !important;
+        line-height: 1.5 !important;
+        word-break: keep-all !important;
+    }
+
+    .form-block {
+        margin-bottom: 20px !important;
+    }
+
+    .block-label {
+        font-size: 0.85rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .decade-chips-group {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .decade-chip {
+        padding: 8px 4px !important;
+        font-size: 0.78rem !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+    }
+
+    .zodiac-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .zodiac-chip {
+        padding: 8px 2px !important;
+        font-size: 0.76rem !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+    }
+
+    .year-sub-chips {
+        margin-top: 8px !important;
+        padding: 10px 12px !important;
+        border-radius: 12px !important;
+    }
+
+    .year-sub-chips .chip-group {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)) !important;
+        gap: 6px !important;
+    }
+
+    .months-grid {
+        display: grid !important;
+        grid-template-columns: repeat(6, 1fr) !important;
+        gap: 5px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .months-grid .select-chip {
+        padding: 8px 2px !important;
+        text-align: center !important;
+        font-size: 0.82rem !important;
+    }
+
+    .time-chips-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    .time-chip {
+        padding: 8px 10px !important;
+        border-radius: 10px !important;
+        min-height: 48px !important;
+    }
+
+    .time-icon {
+        display: none !important;
+    }
+
+    .time-title {
+        font-size: 0.82rem !important;
+        font-weight: 700 !important;
+    }
+
+    .time-sub {
+        font-size: 0.68rem !important;
+        color: #a29aa8 !important;
+    }
+
+    .obanggi-selector {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    .obanggi-flag {
+        padding: 8px 2px !important;
+        border-radius: 8px !important;
+        font-size: 0.76rem !important;
+    }
+
+    .submit-btn {
+        width: 100% !important;
+        padding: 15px 14px !important;
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem) !important;
+        border-radius: 14px !important;
+        word-break: keep-all !important;
+    }
+
+    /* (5) 결과 리포트 섹션 (#result-section) */
+    .result-section {
+        padding: 16px 10px !important;
+    }
+
+    .result-action-bar {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .action-btn {
+        padding: 9px 4px !important;
+        font-size: 0.74rem !important;
+        justify-content: center !important;
+        text-align: center !important;
+        white-space: normal !important;
+        line-height: 1.2 !important;
+        border-radius: 10px !important;
+    }
+
+    .mz-spec-card-wrap {
+        padding: 16px 12px !important;
+        border-radius: 16px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .mz-character-badge {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.5rem !important;
+        border-radius: 12px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .mz-character-name {
+        font-size: clamp(1rem, 3.8vw, 1.25rem) !important;
+        line-height: 1.35 !important;
+        word-break: keep-all !important;
+    }
+
+    .mz-punchline-box {
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        margin-bottom: 14px !important;
+        font-size: 0.85rem !important;
+        line-height: 1.55 !important;
+        word-break: keep-all !important;
+    }
+
+    .mz-spec-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .mz-reality-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin-top: 14px !important;
+    }
+
+    .result-view-switcher {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .view-switch-btn {
+        padding: 8px 8px !important;
+        border-radius: 10px !important;
+    }
+
+    .switch-title {
+        font-size: 0.82rem !important;
+    }
+
+    .switch-sub {
+        font-size: 0.68rem !important;
+    }
+
+    .wt-report-card {
+        padding: 14px 12px !important;
+        border-radius: 16px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .wt-hero-frame {
+        border-radius: 12px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .wt-hero-img {
+        aspect-ratio: 16/10 !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .wt-speech-bubble {
+        padding: 12px 10px !important;
+        gap: 8px !important;
+        border-radius: 12px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .bubble-avatar {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 0.76rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .bubble-text {
+        font-size: clamp(0.84rem, 3.1vw, 0.92rem) !important;
+        line-height: 1.6 !important;
+        word-break: keep-all !important;
+    }
+
+    .wt-summary-deck {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+    }
+
+    /* (6) 4주 8자 명식표 안전 스크롤 & 프레임 수렴 */
+    .pillars-table-wrapper {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin-bottom: 20px !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    }
+
+    .pillars-table {
+        width: 100% !important;
+        min-width: 320px !important;
+        font-size: 0.82rem !important;
+    }
+
+    .pillars-table th {
+        padding: 8px 4px !important;
+        font-size: 0.76rem !important;
+    }
+
+    .pillars-table td {
+        padding: 8px 4px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .pillars-table .row-label {
+        width: 64px !important;
+        min-width: 64px !important;
+        font-size: 0.7rem !important;
+        padding: 6px 2px !important;
+    }
+
+    .char-cell {
+        font-size: 1.2rem !important;
+        font-weight: 800 !important;
+    }
+
+    /* (7) 입력창 iOS 16px 줌 방지 */
     input[type="text"],
     input[type="number"],
     input[type="tel"],
@@ -4213,89 +4750,34 @@ body {
         font-size: 16px !important;
     }
 
-    /* 모바일 버튼 터치 타깃 최소 높이 확보 */
-    .select-chip, .time-chip, .obanggi-flag, .action-btn, .webtoon-touch-cta {
-        min-height: 44px;
+    /* (8) 모바일 플로팅 퀵 액션 바 */
+    .mobile-floating-bar {
+        width: calc(100% - 24px) !important;
+        max-width: 420px !important;
+        padding: 6px 10px !important;
+        border-radius: 24px !important;
+        gap: 6px !important;
+    }
+
+    .mfb-btn {
+        padding: 8px 10px !important;
+        font-size: 0.78rem !important;
     }
 }
 
-/* 3. 모바일 하단 엄지손가락(Thumb Zone) 플로팅 퀵 액션 바 */
-.mobile-floating-bar {
-    position: fixed;
-    bottom: calc(env(safe-area-inset-bottom, 12px) + 12px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 32px);
-    max-width: 440px;
-    background: rgba(18, 14, 28, 0.92);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    border-radius: 28px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    z-index: 9999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.25);
-    backdrop-filter: blur(16px);
-    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
+/* 3. 초소형 화면 (max-width: 380px) 전용 마이크로 튜닝 */
+@media screen and (max-width: 380px) {
+    .months-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
 
-.mobile-floating-bar.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, 40px);
-}
+    .decade-chips-group {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 
-.mfb-btn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 10px 12px;
-    border-radius: 20px;
-    border: none;
-    font-size: 0.82rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.mfb-btn:active {
-    transform: scale(0.95);
-}
-
-.mfb-btn.insta {
-    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    color: #ffffff;
-    box-shadow: 0 2px 10px rgba(220, 39, 67, 0.4);
-}
-
-.mfb-btn.kakao {
-    background: #fee500;
-    color: #191919;
-    box-shadow: 0 2px 10px rgba(254, 229, 0, 0.35);
-}
-
-.mfb-btn.top {
-    flex: 0 0 auto;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    border-radius: 50%;
-}
-
-.mfb-btn.top .mfb-label {
-    display: none;
-}
-
-.mfb-icon {
-    font-size: 1.1rem;
-    line-height: 1;
+    .zodiac-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
 }
 
 /* 데스크탑 화면에서는 모바일 플로팅 바 불필요 숨김 */
