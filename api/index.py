@@ -131,9 +131,16 @@ class handler(BaseHTTPRequestHandler):
 
                 # 사주팔자 계산
                 saju_result = calculate_saju(solar_year, solar_month, solar_day, hour, minute, gender=gender)
-                ziwei_chart = calculate_ziwei_from_saju(saju_result)
+                saju_result["korean_age"] = 2026 - solar_year + 1
+                ziwei_chart = calculate_ziwei_from_saju(
+                    saju_result,
+                    is_lunar=is_lunar,
+                    original_year=year if 'year' in locals() else None,
+                    original_month=month if 'month' in locals() else None,
+                    original_day=day if 'day' in locals() else None
+                )
                 spirit_vision = analyze_shamanic_vision(saju_result, obanggi_choice, concern, name=name, ziwei_data=ziwei_chart)
-                global_spirit = analyze_global_spirituality(saju_result, concern)
+                global_spirit = analyze_global_spirituality(saju_result)
 
                 reading_result = generate_guija_reading(
                     saju_result,
