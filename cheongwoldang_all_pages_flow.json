@@ -1,0 +1,248 @@
+[
+  {
+    "id": 690,
+    "title": "팩폭점사_표지",
+    "stage": "free",
+    "blocks": [
+      {
+        "id": 4083,
+        "name": "fullscreen-step-title-image",
+        "options": {
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "padding": {
+            "left": 32,
+            "right": 32
+          },
+          "imageUrl": "/uploads/admin/dev/blocs/images/20260729/27ecab2a-73f3-47a5-a971-30f1d8c74db1.webp",
+          "aspectRatio": "1095/489"
+        }
+      },
+      {
+        "id": 4084,
+        "name": "default-cta",
+        "options": {
+          "action": "next",
+          "margin": {
+            "top": 24,
+            "bottom": 20
+          },
+          "tracking": "submit_form",
+          "buttonText": "시작하기",
+          "goToPageId": 731,
+          "tooltipText": "",
+          "trackingKey": "inputflow_start",
+          "buttonBgColor": "linear-gradient(91deg, #2E396F 6.71%, #5F67C6 93.29%)",
+          "buttonTextColor": "#DDEAFF",
+          "buttonBorderColor": null
+        }
+      }
+    ],
+    "nextPageId": 731
+  },
+  {
+    "id": 731,
+    "title": "웹툰",
+    "stage": "free",
+    "blocks": [
+      {
+        "id": 4742,
+        "name": "scroll-direction-hint",
+        "options": {}
+      },
+      {
+        "id": 5563,
+        "name": "webtoon-skip-cta",
+        "options": {
+          "action": "next",
+          "goToPageId": 737,
+          "tooltipText": "웹툰은 다음에, 점사부터 볼게요!",
+          "trackingKey": "inputflow_intro_skip"
+        }
+      },
+      {
+        "id": 5564,
+        "name": "webtoon-skip-cta",
+        "options": {
+          "action": "next",
+          "goToPageId": 737,
+          "tooltipText": "웹툰은 다음에, 점사부터 볼게요!",
+          "trackingKey": "inputflow_intro_skip"
+        }
+      },
+      {
+        "id": 4744,
+        "name": "image",
+        "options": {
+          "alt": "1125/7419",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260807/63eef2fb-1819-459a-bbfb-c63b8f190740.webp"
+        }
+      },
+      {
+        "id": 4745,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260807/99d67016-21db-4760-86c5-2da3988c6a84.webp",
+          "aspectRatio": "1125/7047"
+        }
+      },
+      {
+        "id": 4746,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260811/81cca51f-942f-44a3-aeb9-909d9b56e93b.webp",
+          "aspectRatio": "1500/8752"
+        }
+      },
+      {
+        "id": 4747,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260811/f3c99032-514e-46e1-924f-74bcaa97edce.webp",
+          "aspectRatio": "1500/7079"
+        }
+      },
+      {
+        "id": 4748,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/dev/blocs/images/20260814/7a01c493-4349-42e7-834f-587e220ffd22.webp",
+          "aspectRatio": "1500/6800"
+        }
+      },
+      {
+        "id": 4749,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260807/4f6df780-dc90-4455-a59b-97d040f69486.webp",
+          "aspectRatio": "1125/2427"
+        }
+      },
+      {
+        "id": 4750,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260807/dd11cdd4-1300-494f-ab87-384b993324e4.webp",
+          "aspectRatio": "1125/7479"
+        }
+      },
+      {
+        "id": 4751,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/live/blocs/images/20260807/c710cd97-f6bf-4c56-9821-52a223e8e352.webp",
+          "aspectRatio": "1125/7503"
+        }
+      },
+      {
+        "id": 4752,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/dev/blocs/images/20260814/528d93d2-4747-44e0-8442-d952745e10bc.webp",
+          "aspectRatio": "1500/9366"
+        }
+      },
+      {
+        "id": 4753,
+        "name": "image",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "imageUrl": "/uploads/admin/dev/blocs/images/20260814/e060a20a-c5ae-479b-89c7-20b1bad0f119.webp",
+          "aspectRatio": "1500/5723"
+        }
+      },
+      {
+        "id": 4754,
+        "name": "video",
+        "options": {
+          "alt": "",
+          "mode": "default",
+          "isLoop": true,
+          "margin": {
+            "top": 0,
+            "bottom": 0
+          },
+          "videoUrl": "/uploads/admin/dev/blocs/videos/20260814/c81d8b43-d4f1-41c7-95da-e3215d3e2d0a.mp4",
+          "posterUrl": "/uploads/admin/dev/blocs/images/20260814/69abc14e-fab9-4979-8ff9-9cb72e6f9768.webp",
+          "aspectRatio": "1082/1920",
+          "scrollScrub": null
+        }
+      },
+      {
+        "id": 4755,
+        "name": "immersive-cta",
+        "options": {
+          "href": "",
+          "action": "next",
+          "margin": {
+            "top": -64,
+            "bottom": 20
+          },
+          "buttonText": "시아를 따라간다.",
+          "trackingKey": "inputflow_intro"
+        }
+      }
+    ],
+    "nextPageId": null
+  }
+]

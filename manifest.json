@@ -1,0 +1,24 @@
+{
+  "name": "天命明鏡 (천명명경) | 2030 천명 신점사주",
+  "short_name": "천명명경",
+  "description": "50년 만세력 천문 역법과 칼 융 무의식이 결합된 2030 팩폭 신점사주 & 웹툰 시네마틱 뷰",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0b14",
+  "theme_color": "#1a1424",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/webtoon_3.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/webtoon_4.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

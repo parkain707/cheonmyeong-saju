@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0d0b14">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="천명명경">
+    <link rel="manifest" href="manifest.json">
+    <title>天命明鏡 (천명명경) | 2030 천명 신점사주 & 웹툰 시네마틱 뷰</title>
+    <!-- 맑은 고딕 가독성 극대화 스타일 -->
+    <style>
+        body, button, input, select, textarea, table, th, td, h1, h2, h3, h4, h5, h6, p, span, div {
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif !important;
+            letter-spacing: -0.3px;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css?v=20261001_2300">
+</head>
+<body>
+    <!-- 배경 은은한 오로라 & 금빛 파동 효과 -->
+    <div class="fog-layer fog-1"></div>
+    <div class="fog-layer fog-2"></div>
+    <div class="vignette-overlay"></div>
+    <!-- 도인의 거울 개안 플래시 트랜지션 이펙트 -->
+    <div id="mirror-flash" class="mirror-flash-effect"></div>
+
+    <div class="app-container">
+        <!-- 헤더 -->
+        <header class="main-header">
+            <div class="header-badge">동양 정통 비전(秘傳) × 현허도인(玄虛道人)의 천기 혜안</div>
+            <h1 class="service-title">天命明鏡 <span>천명명경</span></h1>
+            <p class="service-subtitle">동양 정통 명리학 × 샤머니즘 신점 혜안 × 칼 융 심리원형 & 7대 차크라</p>
+            
+            <!-- 소셜 프루프 뱃지 -->
+            <div class="social-proof-bar">
+                <span class="rating-stars">★★★★★ 4.98</span>
+                <span class="proof-text">누적 감명 148,290명 | "가슴에 맺힌 응어리를 꿰뚫어 풀고 나아갈 길을 밝히는 혜안"</span>
+            </div>
+        </header>
+
+        <!-- 메인 내비게이션 3대 탭바 (2030 모던 미니멀 스타일) -->
+        <nav class="main-nav-tabs">
+            <div class="nav-tab-group">
+                <button type="button" class="nav-tab-btn active" id="tab-btn-saju" data-tab="saju">🔮 사주 운명 진단</button>
+                <button type="button" class="nav-tab-btn" id="tab-btn-gunghap" data-tab="gunghap">💞 2인 궁합</button>
+                <button type="button" class="nav-tab-btn" id="tab-btn-qa" data-tab="qa">💬 1:1 심층 문답</button>
+            </div>
+            <button type="button" class="nav-stamp-pill-btn" id="btn-open-stamp" title="출석 도장 찍고 질문권 받기">
+                <span>🎁 출석</span>
+                <span class="stamp-count-badge" id="header-stamp-count">스탬프</span>
+            </button>
+        </nav>
+
+        <!-- 2인 천기궁합 섹션 -->
+        <section id="gunghap-section" class="card-section hidden">
+            <div class="intro-box">
+                <p class="intro-quote">"두 영혼이 마주하여 천명의 불꽃을 튀기니, 맺어질 인연인지 스쳐갈 업장인지 도인이 낱낱이 비추어주마."</p>
+                <p class="intro-desc">두 사람의 4주 8자와 자미두수 명궁·부처궁을 입체 교차하여 정신적·현실적 케미와 오행 상호 보완도를 촌철살인으로 투시합니다.</p>
+            </div>
+
+            <!-- 4대 관계 유형 선택 칩 -->
+            <div class="form-block">
+                <label class="block-label">1. 관계 유형을 선택하세요</label>
+                <div class="relationship-chips">
+                    <button type="button" class="rel-chip active" data-rel="dating">💞 썸/연애</button>
+                    <button type="button" class="rel-chip" data-rel="crush">💘 짝사랑</button>
+                    <button type="button" class="rel-chip" data-rel="married">💍 부부</button>
+                    <button type="button" class="rel-chip" data-rel="business">🤝 업무/동업</button>
+                </div>
+            </div>
+
+            <!-- 2인 사주 입력 그리드 (A vs B) -->
+            <div class="gunghap-input-grid">
+                <div class="person-card">
+                    <h3 class="person-title">👤 본인 사주 정보</h3>
+                    <div class="input-group">
+                        <label>이름</label>
+                        <input type="text" id="gh-name-a" placeholder="본인 이름" value="홍길동" class="gh-input">
+                    </div>
+                    <div class="input-group">
+                        <label>생년월일 (양력)</label>
+                        <div class="date-row">
+                            <input type="number" id="gh-year-a" placeholder="년(4자리)" value="1993" class="gh-input num-input">
+                            <input type="number" id="gh-month-a" placeholder="월" value="8" class="gh-input num-input">
+                            <input type="number" id="gh-day-a" placeholder="일" value="17" class="gh-input num-input">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>태어난 시간 (0~23시)</label>
+                        <input type="number" id="gh-hour-a" placeholder="시간 (예: 18)" value="18" class="gh-input">
+                    </div>
+                    <div class="input-group">
+                        <label>성별</label>
+                        <div class="mini-chips">
+                            <button type="button" class="mini-chip active" data-target="gh-gender-a" data-val="male">남성</button>
+                            <button type="button" class="mini-chip" data-target="gh-gender-a" data-val="female">여성</button>
+                        </div>
+                        <input type="hidden" id="gh-gender-a" value="male">
+                    </div>
+                </div>
+
+                <div class="person-card">
+                    <h3 class="person-title">👥 상대방 사주 정보</h3>
+                    <div class="input-group">
+                        <label>이름</label>
+                        <input type="text" id="gh-name-b" placeholder="상대방 이름" value="성춘향" class="gh-input">
+                    </div>
+                    <div class="input-group">
+                        <label>생년월일 (양력)</label>
+                        <div class="date-row">
+                            <input type="number" id="gh-year-b" placeholder="년(4자리)" value="1995" class="gh-input num-input">
+                            <input type="number" id="gh-month-b" placeholder="월" value="5" class="gh-input num-input">
+                            <input type="number" id="gh-day-b" placeholder="일" value="20" class="gh-input num-input">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>태어난 시간 (모르면 12시)</label>
+                        <input type="number" id="gh-hour-b" placeholder="시간 (예: 10)" value="10" class="gh-input">
+                    </div>
+                    <div class="input-group">
+                        <label>성별</label>
+                        <div class="mini-chips">
+                            <button type="button" class="mini-chip" data-target="gh-gender-b" data-val="male">남성</button>
+                            <button type="button" class="mini-chip active" data-target="gh-gender-b" data-val="female">여성</button>
+                        </div>
+                        <input type="hidden" id="gh-gender-b" value="female">
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" id="btn-submit-gunghap" class="submit-btn full-btn">
+                <span>💞 두 사람의 천기 궁합 분석하기</span>
+            </button>
+
+            <!-- 궁합 결과 카드 영역 -->
+            <div id="gunghap-result" class="gunghap-result-card hidden">
+                <div class="gh-header">
+                    <div class="gh-badge" id="gh-rel-badge">💞 썸/연애 궁합</div>
+                    <h2 class="gh-score-title">
+                        천기 궁합 점수: <span id="gh-total-score" class="gh-gold-text">85</span>점
+                    </h2>
+                    <div class="gh-grade-badge" id="gh-grade">찰떡궁합 (相生之合)</div>
+                    <p class="gh-grade-desc" id="gh-grade-desc"></p>
+                </div>
+
+                <!-- 4대 케미 바 -->
+                <div class="gh-metrics-grid">
+                    <div class="gh-metric-item">
+                        <span class="m-label">영혼 케미 (일간합)</span>
+                        <div class="m-bar-bg"><div class="m-bar-fill" id="bar-spirit" style="width: 85%;"></div></div>
+                        <span class="m-val" id="val-spirit">85%</span>
+                    </div>
+                    <div class="gh-metric-item">
+                        <span class="m-label">속궁합/현실 (일지합)</span>
+                        <div class="m-bar-bg"><div class="m-bar-fill" id="bar-reality" style="width: 90%;"></div></div>
+                        <span class="m-val" id="val-reality">90%</span>
+                    </div>
+                    <div class="gh-metric-item">
+                        <span class="m-label">오행 보완도</span>
+                        <div class="m-bar-bg"><div class="m-bar-fill" id="bar-elem" style="width: 80%;"></div></div>
+                        <span class="m-val" id="val-elem">80%</span>
+                    </div>
+                    <div class="gh-metric-item">
+                        <span class="m-label">사회적 조화 (띠궁합)</span>
+                        <div class="m-bar-bg"><div class="m-bar-fill" id="bar-social" style="width: 75%;"></div></div>
+                        <span class="m-val" id="val-social">75%</span>
+                    </div>
+                </div>
+
+                <!-- 도인의 직설 공수 -->
+                <div class="gh-speech-box">
+                    <h4 class="gh-speech-title">📜 현허도인의 관계 천기 직설 공수</h4>
+                    <p id="gh-speech-text" class="gh-speech-p"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1:1 천기문답소 섹션 -->
+        <section id="qa-section" class="card-section hidden">
+            <div class="intro-box">
+                <p class="intro-quote">"마음속 응어리와 깊은 고민을 숨김없이 털어놓거라. 사주와 하늘의 별을 비추어 직설로 답하마."</p>
+                <p class="intro-desc">질문자의 사주 원국과 황실 자미두수 성반을 앵커로 고정하여, 피상적 답변이 아닌 촌철살인의 도인 공수를 실시간으로 내립니다.</p>
+            </div>
+
+            <!-- 3대 리딩 모드 칩 -->
+            <div class="form-block">
+                <label class="block-label">리딩 모드를 선택하세요</label>
+                <div class="qa-mode-chips">
+                    <button type="button" class="qa-mode-chip active" data-mode="single">⚡ 싱글 리딩 (1문 1답 직설)</button>
+                    <button type="button" class="qa-mode-chip" data-mode="quick">🔍 퀵 리딩 (3단 요약)</button>
+                    <button type="button" class="qa-mode-chip" data-mode="deep">🌌 딥 리딩 (사주+자미 심층 공수)</button>
+                </div>
+            </div>
+
+            <!-- 추천 질문 칩 프리셋 -->
+            <div class="form-block">
+                <label class="block-label">💡 이런 질문을 많이 여쭙습니다 (누르면 자동 입력)</label>
+                <div class="preset-chips">
+                    <button type="button" class="preset-chip">지금 하는 일을 계속하면 잘 풀릴 수 있을까요?</button>
+                    <button type="button" class="preset-chip">올해 안에 이직이나 사업을 시도해도 괜찮을까요?</button>
+                    <button type="button" class="preset-chip">헤어진 그 사람에게서 다시 연락이 올까요?</button>
+                    <button type="button" class="preset-chip">묶여 있는 돈이나 빚의 굴레에서 언제쯤 벗어날 수 있을까요?</button>
+                </div>
+            </div>
+
+            <!-- 채팅 대화 히스토리 컨테이너 -->
+            <div id="qa-chat-history" class="qa-chat-box">
+                <div class="chat-msg msg-shaman">
+                    <div class="shaman-avatar">玄虛</div>
+                    <div class="msg-bubble">
+                        "어서 오시오. 그대의 생년월일시와 하늘의 별자리를 펼쳐두었으니, 가슴을 짓누르는 번민을 무엇이든 솔직하게 털어놓으시오."
+                    </div>
+                </div>
+            </div>
+
+            <!-- 질문 입력 바 -->
+            <div class="qa-input-bar">
+                <textarea id="qa-input-text" placeholder="궁금한 고민을 자유롭게 물어보세요 (예: 올해 상반기에 이직운이 있을까요?)" rows="2"></textarea>
+                <button type="button" id="btn-send-qa" class="qa-send-btn">
+                    <span>도인께<br>여쭙기 🪶</span>
+                </button>
+            </div>
+            <p class="qa-notice">※ 로또, 주식 상한가, 코인, 도박 등 사행성 질문은 천기 누설 금기 규율에 의해 엄격히 차단됩니다.</p>
+        </section>
+
+        <!-- [2030 MZ 감성 저격] 천명루 오리지널 웹툰 뷰어 프레임 -->
+        <section id="webtoon-intro-section" class="webtoon-viewer-section">
+            <div class="webtoon-app-frame">
+                <!-- 뷰어 상단 바 -->
+                <div class="webtoon-viewer-header">
+                    <div class="wvh-left">
+                        <span class="wvh-episode-badge">PROLOGUE</span>
+                        <h2 class="wvh-title">천명루 (天命樓) : 개안(開眼)의 밤</h2>
+                    </div>
+                    <button type="button" id="btn-skip-webtoon" class="wvh-skip-btn">
+                        <span>사주 바로보기</span>
+                        <span class="skip-arrow">▼</span>
+                    </button>
+                </div>
+
+                <!-- 세로 스크롤 웹툰 에피소드 본문 -->
+                <div class="webtoon-scroll-canvas">
+                    <!-- 컷 1: 비 내리는 도심 -->
+                    <div class="webtoon-panel panel-1">
+                        <div class="panel-narrative top-nar">
+                            <span class="nar-time">AM 02:15</span>
+                            <p class="nar-text">쏟아지는 빗속... 야근과 빚, 꼬여버린 인간관계에 짓눌려<br>숨이 턱 끝까지 차올랐다.</p>
+                        </div>
+                        <div class="panel-img-wrap">
+                            <img src="images/webtoon_1.jpg" alt="비 내리는 도심 골목길" class="webtoon-real-img" loading="eager">
+                        </div>
+                        <div class="panel-speech monologue">
+                            <p>"대체 내 인생은 어디서부터 잘못된 걸까...?<br>나한테도... 진짜 피어날 운명이라는 게 있기는 한 걸까?"</p>
+                        </div>
+                    </div>
+
+                    <div class="webtoon-cut-divider"></div>
+
+                    <!-- 컷 2: 안갯속 천명루 -->
+                    <div class="webtoon-panel panel-2">
+                        <div class="panel-narrative">
+                            <p class="nar-text">홀린 듯 발걸음이 닿은 깊은 밤 인왕산 자락.<br>짙은 안개 너머, 붉은 청사초롱 불빛 하나가 어둠을 가른다.</p>
+                        </div>
+                        <div class="panel-img-wrap">
+                            <img src="images/webtoon_2.jpg" alt="안개 속 천명루 고택" class="webtoon-real-img" loading="lazy">
+                        </div>
+                        <div class="panel-narrative bottom-nar">
+                            <p class="nar-text">천 년의 시간을 머금은 흑와 전각 <strong>【천명루(天命樓)】</strong>.<br>그 육중한 문이 소리 없이 열리고 있었다.</p>
+                        </div>
+                    </div>
+
+                    <div class="webtoon-cut-divider"></div>
+
+                    <!-- 컷 3: 현허도인 대면 -->
+                    <div class="webtoon-panel panel-3">
+                        <div class="panel-img-wrap">
+                            <img src="images/webtoon_3.jpg" alt="백발의 현허도인" class="webtoon-real-img" loading="lazy">
+                        </div>
+                        <div class="panel-speech master-speech">
+                            <div class="speaker-tag">玄虛道人 (현허도인)</div>
+                            <p class="speech-quote">"왔는가.<br>가슴에 시퍼런 비수를 품고 홀로 버텨온 자여."</p>
+                        </div>
+                        <div class="panel-speech master-speech deep">
+                            <p class="speech-quote">"네 타고난 그릇은 만인을 이끌 황제급의 기운이거늘,<br>어찌 엉뚱한 곳에서 피를 흘리며 스스로를 갉아먹고 있었느냐."</p>
+                        </div>
+                    </div>
+
+                    <div class="webtoon-cut-divider"></div>
+
+                    <!-- 컷 4: 개안의 명경 & 액션 CTA -->
+                    <div class="webtoon-panel panel-4">
+                        <div class="panel-img-wrap">
+                            <img src="images/webtoon_4.jpg" alt="개안의 천명 거울" class="webtoon-real-img" loading="lazy">
+                        </div>
+                        <div class="panel-speech master-speech oracle">
+                            <p class="speech-quote">"이 거울은 거짓을 비추지 않는다.<br>네 타고난 사주팔자와 하늘의 별을 비추어,<br><strong>막힌 곳간을 열고 그대의 진짜 인연을 찾아주마.</strong>"</p>
+                        </div>
+
+                        <!-- 2030 맞춤 대형 터치 액션 버튼 -->
+                        <div class="webtoon-action-box">
+                            <p class="action-hint">※ 도인의 거울을 터치하면 천명의 문이 열립니다.</p>
+                            <button type="button" id="btn-enter-saju-from-inline-webtoon" class="webtoon-touch-cta">
+                                <span class="cta-sparkle">✨</span>
+                                <span class="cta-label">거울 터치하고 내 사주 밝히기</span>
+                                <span class="cta-arrow">👉</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 원클릭 인터랙티브 칩 입력 화면 (개인 사주) - Step 2 화면 전환 대상 -->
+        <section id="input-section" class="card-section hidden">
+            <!-- 웹툰 다시보기 컴팩트 바 -->
+            <div class="webtoon-reopen-bar">
+                <span>🎬 천명루 프롤로그 웹툰을 다시 보시겠습니까?</span>
+                <button type="button" id="btn-reopen-webtoon" class="reopen-webtoon-btn">웹툰 다시보기 📜</button>
+            </div>
+
+            <div class="intro-box">
+                <p class="intro-quote">"혼자서 끙끙 앓지 말고 편하게 콕콕 찍어보거라. 네 앞길을 환히 밝혀주마."</p>
+                <p class="intro-desc">띠와 대략적인 시간대만 칩으로 골라도, 50년 명리 만세력과 칼 융 무의식 체계가 결합되어 타고난 잠재력과 대운의 황금기를 오차 없이 풀어냅니다.</p>
+            </div>
+
+            <form id="saju-form" class="saju-form">
+                <!-- 1. 성별 & 호칭 (원클릭 칩) -->
+                <div class="form-block">
+                    <label class="block-label">1. 성별을 선택하세요</label>
+                    <div class="chip-group">
+                        <button type="button" class="select-chip active" data-group="gender" data-value="male">👨 남성 (乾命)</button>
+                        <button type="button" class="select-chip" data-group="gender" data-value="female">👩 여성 (坤命)</button>
+                    </div>
+                </div>
+
+                <!-- 2. 출생년도 선택 (연대 또는 12간지 띠 원클릭 칩) -->
+                <div class="form-block">
+                    <label class="block-label">2. 출생년도를 선택하세요 (연대 또는 띠를 누르세요)</label>
+                    
+                    <!-- 빠른 연대 선택 칩 -->
+                    <div class="decade-chips-group mb-12">
+                        <button type="button" class="decade-chip" data-decade="1990">90년대 (30대)</button>
+                        <button type="button" class="decade-chip" data-decade="1980">80년대 (40대)</button>
+                        <button type="button" class="decade-chip" data-decade="1970">70년대 (50대)</button>
+                        <button type="button" class="decade-chip" data-decade="1960">60년대 (60대)</button>
+                        <button type="button" class="decade-chip" data-decade="2000">00년대~ (20대)</button>
+                        <button type="button" class="decade-chip" data-decade="1950">50년대 이전</button>
+                    </div>
+
+                    <!-- 12간지 띠 그리드 (1940~2016 전 연령대 완벽 내림차순 지원) -->
+                    <div class="zodiac-grid">
+                        <button type="button" class="zodiac-chip" data-animal="쥐" data-years="2008,1996,1984,1972,1960,1948">🐭 쥐띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="소" data-years="2009,1997,1985,1973,1961,1949">🐮 소띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="호랑이" data-years="2010,1998,1986,1974,1962,1950">🐯 호랑이띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="토끼" data-years="2011,1999,1987,1975,1963,1951">🐰 토끼띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="용" data-years="2012,2000,1988,1976,1964,1952">🐲 용띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="뱀" data-years="2013,2001,1989,1977,1965,1953">🐍 뱀띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="말" data-years="2014,2002,1990,1978,1966,1954">🐴 말띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="양" data-years="2015,2003,1991,1979,1967,1955">🐑 양띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="원숭이" data-years="2016,2004,1992,1980,1968,1956,1944">🐵 원숭이띠</button>
+                        <button type="button" class="zodiac-chip active" data-animal="닭" data-years="2017,2005,1993,1981,1969,1957,1945">🐔 닭띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="개" data-years="2018,2006,1994,1982,1970,1958,1946">🐶 개띠</button>
+                        <button type="button" class="zodiac-chip" data-animal="돼지" data-years="2019,2007,1995,1983,1971,1959,1947">🐷 돼지띠</button>
+                    </div>
+
+                    <!-- 출생 연도 서브 칩 선택 -->
+                    <div class="year-sub-chips">
+                        <div class="sub-chip-header">
+                            <span class="sub-chip-label">출생 연도 선택:</span>
+                            <span id="selected-year-summary" class="year-summary-badge">1993년생 (닭띠, 34세)</span>
+                        </div>
+                        <div id="year-chips-container" class="chip-group">
+                            <button type="button" class="select-chip" data-group="year" data-value="2005">2005년 (22세)</button>
+                            <button type="button" class="select-chip active" data-group="year" data-value="1993">1993년 (34세)</button>
+                            <button type="button" class="select-chip" data-group="year" data-value="1981">1981년 (46세)</button>
+                            <button type="button" class="select-chip" data-group="year" data-value="1969">1969년 (58세)</button>
+                            <button type="button" class="select-chip" data-group="year" data-value="1957">1957년 (70세)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 달력 구분 & 생월/생일 (원클릭 칩) -->
+                <div class="form-block">
+                    <label class="block-label">3. 달력 구분 및 출생월</label>
+                    <div class="chip-group mb-12">
+                        <button type="button" class="select-chip active" data-group="calendar" data-value="solar">☀️ 양력</button>
+                        <button type="button" class="select-chip" data-group="calendar" data-value="lunar">🌙 음력</button>
+                        <button type="button" class="select-chip" data-group="calendar" data-value="lunar_leap">🌓 음력 윤달</button>
+                    </div>
+
+                    <!-- 12개월 원클릭 칩 -->
+                    <div class="months-grid">
+                        <button type="button" class="select-chip" data-group="month" data-value="1">1월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="2">2월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="3">3월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="4">4월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="5">5월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="6">6월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="7">7월</button>
+                        <button type="button" class="select-chip active" data-group="month" data-value="8">8월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="9">9월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="10">10월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="11">11월</button>
+                        <button type="button" class="select-chip" data-group="month" data-value="12">12월</button>
+                    </div>
+
+                    <!-- 생일(일) 슬라이더 또는 빠른 선택 칩 -->
+                    <div class="day-selector-row">
+                        <span class="sub-chip-label">출생일: <strong id="selected-day-label" class="gold-text">17일</strong></span>
+                        <input type="range" id="day-range" min="1" max="31" value="17" class="day-slider">
+                    </div>
+                </div>
+
+                <!-- 4. 태어난 시간대 (일상 생활 원클릭 칩) -->
+                <div class="form-block">
+                    <label class="block-label">4. 태어난 시간대는 언제인가요? (기억나는 순간을 누르세요)</label>
+                    <div class="time-chips-grid">
+                        <button type="button" class="time-chip" data-hour="0">
+                            <span class="time-icon">🌙</span>
+                            <span class="time-title">깊은 밤 / 자정</span>
+                            <span class="time-sub">자시 (23:30~01:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="2">
+                            <span class="time-icon">🐓</span>
+                            <span class="time-title">새벽닭 울 때</span>
+                            <span class="time-sub">축시 (01:30~03:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="4">
+                            <span class="time-icon">🌄</span>
+                            <span class="time-title">동틀 무렵 / 여명</span>
+                            <span class="time-sub">인시 (03:30~05:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="6">
+                            <span class="time-icon">🎒</span>
+                            <span class="time-title">해 뜰 때 / 출근길</span>
+                            <span class="time-sub">묘시 (05:30~07:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="8">
+                            <span class="time-icon">🍚</span>
+                            <span class="time-title">아침밥 먹을 때</span>
+                            <span class="time-sub">진시 (07:30~09:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="10">
+                            <span class="time-icon">☕</span>
+                            <span class="time-title">완연한 오전</span>
+                            <span class="time-sub">사시 (09:30~11:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="12">
+                            <span class="time-icon">☀️</span>
+                            <span class="time-title">한낮 / 점심때</span>
+                            <span class="time-sub">오시 (11:30~13:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="14">
+                            <span class="time-icon">🌿</span>
+                            <span class="time-title">나른한 오후</span>
+                            <span class="time-sub">미시 (13:30~15:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="16">
+                            <span class="time-icon">🛒</span>
+                            <span class="time-title">늦은 오후 / 장볼 때</span>
+                            <span class="time-sub">신시 (15:30~17:29)</span>
+                        </button>
+                        <button type="button" class="time-chip active" data-hour="18">
+                            <span class="time-icon">🌇</span>
+                            <span class="time-title">해질녘 / 퇴근길</span>
+                            <span class="time-sub">유시 (17:30~19:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="20">
+                            <span class="time-icon">📺</span>
+                            <span class="time-title">초저녁 / 저녁밥</span>
+                            <span class="time-sub">술시 (19:30~21:29)</span>
+                        </button>
+                        <button type="button" class="time-chip" data-hour="22">
+                            <span class="time-icon">🛏️</span>
+                            <span class="time-title">잠자리에 들 때</span>
+                            <span class="time-sub">해시 (21:30~23:29)</span>
+                        </button>
+                        <button type="button" class="time-chip special-time" data-hour="-1">
+                            <span class="time-icon">❓</span>
+                            <span class="time-title">시간 전혀 모름</span>
+                            <span class="time-sub">도인의 혜안으로 삼주 역추론</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. 지금 가장 답답한 고민 1가지 선택 -->
+                <div class="form-block">
+                    <label class="block-label">5. 지금 가장 가슴 답답한 고민은? (맞춤 집중 풀이)</label>
+                    <div class="chip-group">
+                        <button type="button" class="select-chip active" data-group="concern" data-value="career">💼 직업 / 이직 (진정한 내 자리가 맞는지)</button>
+                        <button type="button" class="select-chip" data-group="concern" data-value="wealth">💰 돈 그릇 / 재물운</button>
+                        <button type="button" class="select-chip" data-group="concern" data-value="love">❤️ 연애 / 인연과 악연</button>
+                        <button type="button" class="select-chip" data-group="concern" data-value="timing">⚡ 대박 나는 인생 황금기</button>
+                    </div>
+                </div>
+
+                <!-- 6. 오방기 뽑기 의식 -->
+                <div class="form-block ritual-group">
+                    <label class="block-label">6. 신령님께 올리는 오방기(五方旗) 뽑기 의식</label>
+                    <p class="ritual-desc">마음속으로 소원을 품고, 가장 끌리는 깃발을 콕 찍으시오.</p>
+                    <div class="obanggi-selector">
+                        <button type="button" class="obanggi-flag flag-blue" data-flag="청">
+                            <span class="flag-icon">⚑</span>
+                            <span class="flag-label">청기 (동방)</span>
+                        </button>
+                        <button type="button" class="obanggi-flag flag-red" data-flag="적">
+                            <span class="flag-icon">⚑</span>
+                            <span class="flag-label">적기 (남방)</span>
+                        </button>
+                        <button type="button" class="obanggi-flag flag-yellow active" data-flag="황">
+                            <span class="flag-icon">⚑</span>
+                            <span class="flag-label">황기 (중앙)</span>
+                        </button>
+                        <button type="button" class="obanggi-flag flag-white" data-flag="백">
+                            <span class="flag-icon">⚑</span>
+                            <span class="flag-label">백기 (서방)</span>
+                        </button>
+                        <button type="button" class="obanggi-flag flag-black" data-flag="흑">
+                            <span class="flag-icon">⚑</span>
+                            <span class="flag-label">흑기 (북방)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 제출 버튼 -->
+                <button type="submit" class="submit-btn">
+                    <span class="btn-glow"></span>
+                    <span class="btn-text">🔮 천명 신점 & 영성 혜안 풀이 시작</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- 로딩 오버레이 -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="talisman-spinner"></div>
+                <h3 id="loading-text" class="loading-text">하늘의 신령한 기운과 주파수를 조율 중입니다...</h3>
+                <p class="loading-sub">현허도인의 깊은 혜안으로 그대의 타고난 천명과 황금기 운세를 살피고 있습니다.</p>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <section id="result-section" class="result-section hidden">
+            <!-- 상단 빠른 조작 툴바 -->
+            <div class="result-action-bar">
+                <button type="button" id="copy-summary-btn" class="action-btn">
+                    <span>📋</span> 감명 요약 복사
+                </button>
+                <button type="button" id="print-result-btn" class="action-btn btn-print">
+                    <span>🖨️</span> 결과 인쇄 / PDF 저장
+                </button>
+                <button type="button" id="restart-btn" class="action-btn btn-restart">
+                    <span>🔄</span> 새로 감명받기
+                </button>
+            </div>
+
+            <!-- 스마트 보정 안내 알림창 -->
+            <div id="correction-banner" class="correction-banner hidden">
+                <div class="correction-icon">💡</div>
+                <div class="correction-content">
+                    <div class="correction-title">선택 정보 기반 사주 정밀 연산 완료</div>
+                    <ul id="correction-notes" class="correction-list"></ul>
+                </div>
+            </div>
+
+            <!-- [2030 바이럴 킬러] 천명 스펙 카드 & 인스타 공유 모듈 -->
+            <div id="mz-spec-card-container" class="mz-spec-card-wrap">
+                <div class="mz-card-badge-top">
+                    <span class="pulse-dot"></span> 2030 천명 페르소나 스펙 카드
+                </div>
+                
+                <div class="mz-card-main">
+                    <div class="mz-card-header">
+                        <div class="mz-character-badge" id="mz-character-icon">🦅</div>
+                        <div class="mz-character-titles">
+                            <span class="mz-pillar-tag" id="mz-pillar-tag">경오(庚午) 일주</span>
+                            <h2 class="mz-character-name" id="mz-character-name">칼 품은 백마 위의 겉바속촉 워커홀릭</h2>
+                            <div class="mz-hashtags" id="mz-hashtags">
+                                <span class="mz-tag">#팩폭주의보</span>
+                                <span class="mz-tag">#자존심이목숨</span>
+                                <span class="mz-tag">#의외로순정파</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 뼈때리는 팩폭 정의 -->
+                    <div class="mz-punchline-box">
+                        <span class="punchline-icon">⚡</span>
+                        <p class="punchline-text" id="mz-punchline-text">"말은 세상 차갑고 살벌하게 쏘아붙이지만, 뒤에서 몰래 내 편 챙겨주는 츤데레 끝판왕."</p>
+                    </div>
+
+                    <!-- 정통 명리학 3대 초정밀 지표 그리드 -->
+                    <div class="mz-spec-grid">
+                        <!-- 1. 신강/신약 파워 게이지 -->
+                        <div class="mz-spec-item">
+                            <div class="spec-head">
+                                <span class="spec-label">신강·신약 에너지</span>
+                                <strong class="spec-val-badge" id="mz-strength-type">신강 (74점)</strong>
+                            </div>
+                            <div class="mz-power-bar-bg">
+                                <div class="mz-power-bar-fill" id="mz-strength-bar" style="width: 74%;"></div>
+                            </div>
+                            <div class="spec-sub" id="mz-strength-sub">득령(得令) 35점 통과 · 득지(得地) 확보</div>
+                        </div>
+
+                        <!-- 2. 조후/억부 천기 처방 (용신) -->
+                        <div class="mz-spec-item">
+                            <div class="spec-head">
+                                <span class="spec-label">나를 살리는 천기 처방 (용신)</span>
+                                <strong class="spec-val-badge highlight" id="mz-yongsin-name">수(水) 억부용신</strong>
+                            </div>
+                            <div class="mz-lucky-tags" id="mz-lucky-tags">
+                                <span class="lucky-chip">🎨 검은색/딥블루</span>
+                                <span class="lucky-chip">🧭 북쪽</span>
+                                <span class="lucky-chip">🔢 행운수 1, 6</span>
+                            </div>
+                            <div class="spec-sub" id="mz-yongsin-sub">치우친 기운을 식히고 재물을 부르는 처방</div>
+                        </div>
+
+                        <!-- 3. 인생 대박 황금기 D-Day -->
+                        <div class="mz-spec-item">
+                            <div class="spec-head">
+                                <span class="spec-label">10년 대운 대박 황금기</span>
+                                <strong class="spec-val-badge golden" id="mz-golden-age">28세 ~ 37세</strong>
+                            </div>
+                            <div class="spec-golden-sub">
+                                <span id="mz-golden-pillar">간지: 신해(辛亥)</span> · <span id="mz-golden-desc">용신이 활짝 열리는 전성기</span>
+                            </div>
+                            <div class="spec-sub" id="mz-daeun-direction">순행(順行) 4세 주기</div>
+                        </div>
+                    </div>
+
+                    <!-- 원클릭 SNS 바이럴 공유 버튼 덱 -->
+                    <div class="mz-share-btn-deck">
+                        <button type="button" id="btn-share-instagram" class="mz-btn-instagram">
+                            <span class="mz-btn-icon">📸</span>
+                            <span>인스타 스토리에 팩폭 카드 공유</span>
+                        </button>
+                        <button type="button" id="btn-share-kakao" class="mz-btn-kakao">
+                            <span class="mz-btn-icon">💬</span>
+                            <span>카톡으로 내 천명 스펙 쏘기</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [2030 혁신 보기] 결과 2대 뷰 모드 스위처 -->
+            <div class="result-view-switcher">
+                <button type="button" id="btn-view-webtoon" class="view-switch-btn active" data-mode="webtoon">
+                    <span class="switch-icon">🎬</span>
+                    <div class="switch-texts">
+                        <strong class="switch-title">도인의 웹툰 시네마틱 뷰</strong>
+                        <span class="switch-sub">5컷 만화 옴니버스 & 직설 공수</span>
+                    </div>
+                    <span class="rec-badge">추천 HOT</span>
+                </button>
+                <button type="button" id="btn-view-detailed" class="view-switch-btn" data-mode="detailed">
+                    <span class="switch-icon">📜</span>
+                    <div class="switch-texts">
+                        <strong class="switch-title">전체 정밀 명식 뷰</strong>
+                        <span class="switch-sub">만세력 원국표 & 자미두수 12궁 성반</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- MODE 1: [ 🎬 도인의 웹툰 시네마틱 뷰 ] (추천/기본)                 -->
+            <!-- 지루한 줄글을 파괴하고 5컷 일러스트와 도인의 말풍선 대사로 엮인 옴니버스 리포트 -->
+            <!-- ============================================================== -->
+            <div id="result-webtoon-mode" class="result-view-panel active">
+                <div class="webtoon-report-stream">
+                    <!-- 컷 1: [서막: 개안과 운명의 본질] -->
+                    <div class="wt-report-card">
+                        <div class="wt-card-badge">EPISODE 01 · 개안(開眼)</div>
+                        <h3 class="wt-card-title">방황의 끝에서 만난 타고난 천명(天命)</h3>
+                        <div class="wt-hero-frame">
+                            <img src="images/webtoon_1.jpg" alt="도심의 빗속 방황" class="wt-hero-img" loading="eager">
+                            <div class="wt-hero-overlay">
+                                <span class="wt-overlay-tag">사주 원국 개안</span>
+                            </div>
+                        </div>
+                        <div class="wt-speech-bubble">
+                            <div class="bubble-avatar">玄虛</div>
+                            <div class="bubble-body">
+                                <span class="bubble-speaker">현허도인의 첫 공수</span>
+                                <p id="wt-speech-1" class="bubble-text">"차디찬 도심의 빗속에서 갈 길을 잃고 헤매던 영혼이여... 잘 찾아왔다. 그대의 가슴속에 품은 번뇌와 비수를 내가 똑똑히 보았느니라."</p>
+                            </div>
+                        </div>
+                        <!-- 1컷 핵심 요약 뱃지 덱 -->
+                        <div class="wt-summary-deck">
+                            <div class="wt-sum-chip">
+                                <span class="ws-label">타고난 일주(나)</span>
+                                <strong id="wt-day-pillar-name" class="ws-val">갑인(甲寅) 대호</strong>
+                            </div>
+                            <div class="wt-sum-chip">
+                                <span class="ws-label">수호 신령 파동</span>
+                                <strong id="wt-spirit-name" class="ws-val">동방 청룡 개척령</strong>
+                            </div>
+                            <div class="wt-sum-chip">
+                                <span class="ws-label">오방기 신탁</span>
+                                <strong id="wt-obanggi-name" class="ws-val">황기 (안정)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 컷 2: [천명루의 등불: 재물과 건강] -->
+                    <div class="wt-report-card">
+                        <div class="wt-card-badge">EPISODE 02 · 곳간의 불빛</div>
+                        <h3 class="wt-card-title">인왕산 천명루의 세 등불 진단</h3>
+                        <div class="wt-hero-frame">
+                            <img src="images/webtoon_2.jpg" alt="인왕산 천명루의 청사초롱" class="wt-hero-img" loading="lazy">
+                            <div class="wt-hero-overlay">
+                                <span class="wt-overlay-tag">청사초롱 기운 투시</span>
+                            </div>
+                        </div>
+                        <div class="wt-speech-bubble">
+                            <div class="bubble-avatar">玄虛</div>
+                            <div class="bubble-body">
+                                <span class="bubble-speaker">현허도인의 곳간 공수</span>
+                                <p id="wt-speech-2" class="bubble-text">"천명루 처마 밑에 걸린 세 개의 청사초롱을 보아라. 그대의 곳간은 활짝 열렸으나, 마음의 등불이 잦아들었으니 불씨를 지펴야 하느니라."</p>
+                            </div>
+                        </div>
+                        <!-- 2컷 등불 위젯 삽입 컨테이너 -->
+                        <div class="wt-lantern-widget-container" id="wt-lantern-container">
+                            <!-- 동적 렌더링 -->
+                        </div>
+                    </div>
+
+                    <!-- 컷 3: [도인의 혜안: 운명의 3대 인연 5대 스펙] -->
+                    <div class="wt-report-card">
+                        <div class="wt-card-badge">EPISODE 03 · 붉은 실</div>
+                        <h3 class="wt-card-title">그대를 기다리는 3대 인연의 5대 신상 명세</h3>
+                        <div class="wt-hero-frame">
+                            <img src="images/webtoon_3.jpg" alt="현허도인의 찻잔과 혜안" class="wt-hero-img" loading="lazy">
+                            <div class="wt-hero-overlay">
+                                <span class="wt-overlay-tag">인연 5대 스펙 투시</span>
+                            </div>
+                        </div>
+                        <div class="wt-speech-bubble">
+                            <div class="bubble-avatar">玄虛</div>
+                            <div class="bubble-body">
+                                <span class="bubble-speaker">현허도인의 인연 공수</span>
+                                <p id="wt-speech-3" class="bubble-text">"바둑판 위의 돌처럼, 그대의 운명에 얽힌 세 사람의 얼굴과 초성을 짚어주마. 백돌은 전생 배필이요, 적돌은 피해야 할 악연이니라."</p>
+                            </div>
+                        </div>
+                        <!-- 바둑알 탭 바 -->
+                        <div class="baduk-touch-bar wt-baduk-bar">
+                            <button type="button" class="baduk-chip active" data-target="0">⚪ 백돌: 전생 붉은 실 배필</button>
+                            <button type="button" class="baduk-chip" data-target="1">⚫ 흑돌: 현실 상생 동반자</button>
+                            <button type="button" class="baduk-chip danger-baduk" data-target="2">🔴 적돌: 치명적 악연 경계</button>
+                        </div>
+                        <!-- 3컷 인연 카드 덱 삽입 -->
+                        <div class="partner-cards-container wt-partner-cards" id="wt-partner-container">
+                            <!-- JS에서 3개 카드 동적 렌더링 -->
+                        </div>
+                    </div>
+
+                    <!-- 컷 4: [성지와 조우: 길한 방위와 만남의 공간] -->
+                    <div class="wt-report-card">
+                        <div class="wt-card-badge">EPISODE 04 · 공간 비책</div>
+                        <h3 class="wt-card-title">사주의 기운을 살리는 길한 방위와 조우 성지</h3>
+                        <div class="wt-speech-bubble">
+                            <div class="bubble-avatar">玄虛</div>
+                            <div class="bubble-body">
+                                <span class="bubble-speaker">현허도인의 방위 공수</span>
+                                <p id="wt-speech-4" class="bubble-text">"인연과 돈은 제자리에 가만히 앉아 기다린다고 오지 않는다. 그대의 오행을 살려줄 지도 위의 좌표로 발걸음을 옮겨라."</p>
+                            </div>
+                        </div>
+                        <!-- 4컷 방위 성지 카드 삽입 -->
+                        <div class="wt-place-container" id="wt-place-container">
+                            <!-- 동적 주입 -->
+                        </div>
+                    </div>
+
+                    <!-- 컷 5: [천명 거울과 비책: 살풀이 골든타임 & 황금 부적] -->
+                    <div class="wt-report-card">
+                        <div class="wt-card-badge">EPISODE 05 · 살풀이 비책</div>
+                        <h3 class="wt-card-title">흉살 소멸 골든타임 D-7 & 현허도인의 맞춤 부적</h3>
+                        <div class="wt-hero-frame">
+                            <img src="images/webtoon_4.jpg" alt="우주의 기운이 소용돌이치는 천명 거울" class="wt-hero-img" loading="lazy">
+                            <div class="wt-hero-overlay">
+                                <span class="wt-overlay-tag">천명 거울 비책</span>
+                            </div>
+                        </div>
+                        <div class="wt-speech-bubble">
+                            <div class="bubble-avatar">玄虛</div>
+                            <div class="bubble-body">
+                                <span class="bubble-speaker">현허도인의 살풀이 공수</span>
+                                <p id="wt-speech-5" class="bubble-text">"천명 거울 속 흉살의 파동을 보았느냐? 골든타임 D-7일 안에 부적을 지니고 마음을 다잡지 않으면 구설과 손재수가 덮칠 수 있다."</p>
+                            </div>
+                        </div>
+                    <!-- [2030 천기누설 팩폭관] 직장 번아웃, 이직 골든타임, 애착유형, 재테크 성향 -->
+                    <div class="wt-report-card mz-reality-card">
+                        <div class="wt-card-badge mz-badge">SPECIAL EPISODE · 2030 현실 팩폭관</div>
+                        <h3 class="wt-card-title">이직 각? 연애 각? 뼈때리는 현실 운명 처방전</h3>
+
+                        <div class="mz-reality-grid">
+                            <!-- 1. 직장 & 번아웃 팩폭 -->
+                            <div class="mz-reality-box">
+                                <div class="mz-rb-header">
+                                    <span class="mz-rb-icon">💼</span>
+                                    <h4>직장 번아웃 & 이직 골든타임</h4>
+                                    <span class="mz-burnout-badge" id="mz-burnout-badge">주의 (50%)</span>
+                                </div>
+                                <div class="mz-burnout-bar-wrap">
+                                    <div class="mz-burnout-bar-fill" id="mz-burnout-bar" style="width: 50%;"></div>
+                                </div>
+                                <p class="mz-reality-desc" id="mz-burnout-msg">"퇴근 후 아무것도 하기 싫어 유튜브 쇼츠만 멍하니 보다가 새벽 2시에 잠드는 만성 피로 모드."</p>
+                                <div class="mz-callout-box">
+                                    <strong>🚀 추천 이직 골든타임:</strong>
+                                    <span id="mz-turnover-months">양력 11~1월 (심해의 은밀한 이적)</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. 연애 심리 애착유형 -->
+                            <div class="mz-reality-box">
+                                <div class="mz-rb-header">
+                                    <span class="mz-rb-icon">💘</span>
+                                    <h4>연애 애착 유형 & 플러팅 주의보</h4>
+                                    <span class="mz-attach-badge" id="mz-attach-badge">🛡️ 철벽 동굴 잠수러</span>
+                                </div>
+                                <p class="mz-reality-desc" id="mz-attach-desc">상대방이 내 개인 영역을 침범하면 급격히 피로해지며 동굴로 숨는 단절 회피형 성향.</p>
+                                <div class="mz-callout-box">
+                                    <strong>💡 플러팅 & 공략 팁:</strong>
+                                    <span id="mz-attach-advice">닥달하지 말고 혼자만의 시간을 철저히 보장해줄 때 서서히 마음을 엶.</span>
+                                </div>
+                            </div>
+
+                            <!-- 3. 재테크 돈복 성향 -->
+                            <div class="mz-reality-box">
+                                <div class="mz-rb-header">
+                                    <span class="mz-rb-icon">💰</span>
+                                    <h4>2030 재테크 & 돈복 터지는 전략</h4>
+                                    <span class="mz-wealth-badge" id="mz-wealth-badge">하이리스크 승부사</span>
+                                </div>
+                                <p class="mz-reality-desc" id="mz-wealth-desc">적금 넣으면 속 터지는 타입. 판의 흐름을 읽고 코인/스윙 등 한 방이 터지는 곳에 과감히 베팅.</p>
+                                <div class="mz-callout-box">
+                                    <strong>⚠️ 부의 퀀텀 점프 조언:</strong>
+                                    <span id="mz-wealth-tip">손절 기준(-7%)을 칼같이 세우지 않으면 한 번에 3년 치 수익을 반납하니 주의!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 옴니버스 엔딩: 전체 상세 명식 전환 유도 배너 -->
+                    <div class="wt-ending-switch-banner">
+                        <div class="wes-content">
+                            <span class="wes-icon">📜</span>
+                            <div class="wes-text">
+                                <h4>정통 만세력 표와 황실 자미두수 12궁 성반을 더 깊이 보고 싶으신가요?</h4>
+                                <p>학술적 4주 8자 십성표, 7대 차크라, 육감 헥사곤, 11대 천기 챕터 상세 리포트가 준비되어 있습니다.</p>
+                            </div>
+                        </div>
+                        <button type="button" id="btn-switch-to-detailed" class="wes-btn">
+                            <span>전체 정밀 명식 & 성반 뷰로 전환하기 👉</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- MODE 2: [ 📜 전체 정밀 명식 뷰 ] (학술 전문 분석)                 -->
+            <!-- 전통 4주 8자 만세력 표, 칼 융 원형, 육감 레이더, 자미두수 12궁 성반, 11챕터 아코디언 -->
+            <!-- ============================================================== -->
+            <div id="result-detailed-mode" class="result-view-panel hidden">
+
+            <!-- 신점 혜안(慧眼) 직설 공수 배너 -->
+            <div id="shamanic-vision-block" class="shamanic-vision-card">
+                <div class="shamanic-header">
+                    <div class="shamanic-badge">✨ 현허도인(玄虛道人)의 천기 신점 혜안(慧眼) 직설</div>
+                    <div id="res-spirit-moment" class="shamanic-moment">2026년 찰나 영동</div>
+                    <!-- 공시성 실시간 천문 데이터 -->
+                    <div id="res-synchronicity-moment" class="synchronicity-moment"></div>
+                    <!-- 재방문 영혼 배지 -->
+                    <div id="res-reunion-badge" class="reunion-badge hidden"></div>
+                </div>
+
+                <div class="shamanic-body">
+                    <!-- 수호 영적 기운 뱃지 -->
+                    <div class="spirit-detected-box">
+                        <span class="spirit-sub-label">나를 수호하고 이끄는 천명(天命) 파동:</span>
+                        <strong id="res-spirit-name" class="spirit-main-name">동방 청룡의 개척령 (靑龍 開拓靈)</strong>
+                        <p id="res-spirit-desc" class="spirit-sub-desc"></p>
+                    </div>
+
+                    <!-- 도인 신점 직설 공수 전문 (Sacred Pacing 적용) -->
+                    <div class="shamanic-speech-box sacred-pacing">
+                        <p id="res-shamanic-speech" class="speech-quote"></p>
+                    </div>
+
+                    <!-- 무의식 그림자 투시 (Shadow Archetype) -->
+                    <div id="res-unconscious-shadow" class="unconscious-shadow-box"></div>
+
+                    <!-- 오방기 신탁 결과 -->
+                    <div class="obanggi-oracle-pill">
+                        <span class="oracle-tag">🚩 오방기 희망 신탁:</span>
+                        <span id="res-obanggi-oracle" class="oracle-text"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 일일 신점(Daily Spiritual Fortune) 위젯 -->
+            <div class="daily-fortune-widget">
+                <div class="daily-badge">📅 오늘의 일일 신점 & 신령 처방</div>
+                <p id="res-daily-fortune" class="daily-quote"></p>
+            </div>
+
+            <!-- 바이럴 맞춤 황금 부적 (Amulet) 배너 -->
+            <div class="amulet-banner">
+                <div class="amulet-badge">🎴 현허도인의 맞춤 천기 황금 부적</div>
+                <div class="amulet-content-row">
+                    <div class="amulet-visual">
+                        <div class="amulet-paper">
+                            <div class="amulet-red-box">
+                                <span class="amulet-seal-top">敕令</span>
+                                <span id="res-amulet-name" class="amulet-center-text">萬事如意符</span>
+                                <span class="amulet-seal-bot">急急如律令</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amulet-text-info">
+                        <h4 id="res-amulet-title" class="amulet-title">청룡벽사 만사여의부</h4>
+                        <p id="res-amulet-desc" class="amulet-desc"></p>
+                        <button type="button" id="download-amulet-btn" class="share-amulet-btn">📲 부적 다운로드 및 카톡/인스타 공유</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [청월당 킬러 포맷 1] 청사초롱 5색 기운 등불 진단 -->
+            <div id="lantern-fortune-block" class="result-block lantern-fortune-card">
+                <div class="block-header-sub">
+                    <span class="block-sub-badge">🏮 天命 燈盞</span>
+                    <h3 class="block-title">현허도인의 청사초롱 기운 등불 진단</h3>
+                    <p class="block-desc">그대의 사주 원국에 깃든 오행과 신살의 흐름을 투시하여, 막힌 곳간과 뚫려야 할 기운의 밝기를 진단합니다.</p>
+                </div>
+                <div class="lantern-grid">
+                    <div class="lantern-item">
+                        <div class="lantern-icon-box" id="lantern-wealth-icon">🏮</div>
+                        <div class="lantern-info">
+                            <span class="l-label">재물곳간 기운</span>
+                            <strong class="l-status" id="lantern-wealth-status">환하게 켜짐 (3단계)</strong>
+                            <p class="l-desc" id="lantern-wealth-desc">금전의 혈맥이 열려 곳간에 재물이 차곡차곡 쌓일 길운입니다.</p>
+                        </div>
+                    </div>
+                    <div class="lantern-item">
+                        <div class="lantern-icon-box" id="lantern-love-icon">🏮</div>
+                        <div class="lantern-info">
+                            <span class="l-label">인연/애정 기운</span>
+                            <strong class="l-status" id="lantern-love-status">은은한 불빛 (2단계)</strong>
+                            <p class="l-desc" id="lantern-love-desc">귀인의 기운이 다가오고 있으나 조급함을 버려야 인연이 맺어집니다.</p>
+                        </div>
+                    </div>
+                    <div class="lantern-item">
+                        <div class="lantern-icon-box" id="lantern-health-icon">🏮</div>
+                        <div class="lantern-info">
+                            <span class="l-label">기혈/신체 기운</span>
+                            <strong class="l-status" id="lantern-health-status">희미한 등불 (1단계)</strong>
+                            <p class="l-desc" id="lantern-health-desc">신체 통증과 흉살의 파동이 감지되니 기혈의 순환과 휴식이 절실합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [청월당 킬러 포맷 2] 살풀이 골든타임 D-Day & 월별 주의일 달력 -->
+            <div id="caution-calendar-block" class="result-block caution-calendar-card">
+                <div class="salpuri-dday-banner">
+                    <div class="dday-badge">⏳ 흉살 소멸 살풀이 골든타임</div>
+                    <div class="dday-timer-text">
+                        백호·원진 액운 소멸 유효 기간: <strong class="red-glow">D-7일</strong> 남음
+                    </div>
+                    <p class="dday-sub">이 시기 안에 살풀이 개운 비책을 실천하지 않으면 칼과 쇠, 구설수의 파동이 삶을 덮칠 수 있습니다.</p>
+                </div>
+                <div class="caution-schedule-grid">
+                    <div class="caution-sched-header">
+                        <h4>📅 올 한 해 절대 피해야 할 3대 위험일 (Caution Days)</h4>
+                        <span class="sched-tag">※ 이 날짜에는 계약·이직·언쟁 절대 금지</span>
+                    </div>
+                    <div class="caution-cards-row" id="caution-cards-container">
+                        <!-- JS에서 동적 렌더링 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- [청월당 킬러 포맷 3] 운명의 3대 인연 5대 스펙 카드덱 -->
+            <div id="destiny-partner-block" class="result-block destiny-partner-section">
+                <div class="dp-header">
+                    <span class="block-sub-badge">👥 三大人緣 實體</span>
+                    <h3 class="block-title">그대를 기다리는 3대 인연의 5대 신상 명세</h3>
+                    <p class="block-desc">바둑알을 탭하면 전생의 배필, 현실 조화 인연, 그리고 피해야 할 악연의 <strong>【이름 초성 · 키 · 직업 · 띠 · 외모】</strong>가 차례로 공개됩니다.</p>
+                </div>
+
+                <div class="baduk-touch-bar">
+                    <button type="button" class="baduk-chip active" data-target="0">⚪ 백돌: 전생 붉은 실 배필</button>
+                    <button type="button" class="baduk-chip" data-target="1">⚫ 흑돌: 현실 상생 동반자</button>
+                    <button type="button" class="baduk-chip danger-baduk" data-target="2">🔴 적돌: 치명적 악연 경계</button>
+                </div>
+
+                <!-- 3대 인연 카드 컨테이너 -->
+                <div class="partner-cards-container" id="partner-cards-container">
+                    <!-- JS에서 3개 카드 동적 렌더링 -->
+                </div>
+            </div>
+
+            <!-- [청월당 킬러 포맷 4] 동서남북 붓글씨 3차원 공간 좌표 -->
+            <div id="destiny-place-block" class="result-block destiny-place-card">
+                <div class="dp-place-header">
+                    <span class="block-sub-badge">🧭 空間 秘策</span>
+                    <h3 class="block-title">내게 가장 길한 동서남북 방위 & 만남의 장소</h3>
+                    <p class="block-desc">사주의 부족한 오행을 채우고 귀인을 조우할 수 있는 지도 위의 실제 좌표입니다.</p>
+                </div>
+                <div class="place-coords-box">
+                    <div class="calligraphy-seal-box">
+                        <div class="hanja-seal" id="place-hanja-seal">東</div>
+                        <span class="seal-direction-name" id="place-dir-name">동쪽 (East)</span>
+                    </div>
+                    <div class="place-details-info">
+                        <div class="coord-item">
+                            <span class="coord-label">📍 유리한 거리:</span>
+                            <strong id="place-distance-text" class="coord-val">약 15km · 근거리 생활권</strong>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">🏛️ 조우 성지 씬:</span>
+                            <strong id="place-scene-text" class="coord-val">오래된 고목이 자리한 대형 원목 카페 창가</strong>
+                        </div>
+                        <div class="coord-guide-box">
+                            <p id="place-oracle-guide" class="place-oracle-p"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. 사주팔자 4주 8자 명식표 -->
+            <div class="result-block">
+                <h2 class="block-title"><span>四柱八字</span> 만세력 명식 원국</h2>
+                <div id="res-preview-text" class="preview-text-box"></div>
+                <div class="pillars-table-wrapper">
+                    <table class="pillars-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th id="hour-header-label">시주 (時柱)</th>
+                                <th>일주 (日柱)</th>
+                                <th>월주 (月柱)</th>
+                                <th>년주 (年柱)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="sipseong-row">
+                                <td class="row-label">천간 십성</td>
+                                <td id="res-hour-gan-sip">-</td>
+                                <td id="res-day-gan-sip" class="highlight-cell">일원(나)</td>
+                                <td id="res-month-gan-sip">-</td>
+                                <td id="res-year-gan-sip">-</td>
+                            </tr>
+                            <tr class="gan-row">
+                                <td class="row-label">천간 (天干)</td>
+                                <td id="res-hour-gan" class="char-cell">-</td>
+                                <td id="res-day-gan" class="char-cell highlight-cell">-</td>
+                                <td id="res-month-gan" class="char-cell">-</td>
+                                <td id="res-year-gan" class="char-cell">-</td>
+                            </tr>
+                            <tr class="ji-row">
+                                <td class="row-label">지지 (地支)</td>
+                                <td id="res-hour-ji" class="char-cell">-</td>
+                                <td id="res-day-ji" class="char-cell highlight-cell">-</td>
+                                <td id="res-month-ji" class="char-cell">-</td>
+                                <td id="res-year-ji" class="char-cell">-</td>
+                            </tr>
+                            <tr class="sipseong-row">
+                                <td class="row-label">지지 십성</td>
+                                <td id="res-hour-ji-sip">-</td>
+                                <td id="res-day-ji-sip" class="highlight-cell">-</td>
+                                <td id="res-month-ji-sip">-</td>
+                                <td id="res-year-ji-sip">-</td>
+                            </tr>
+                            <tr class="unsung-row">
+                                <td class="row-label">12운성</td>
+                                <td id="res-hour-unsung">-</td>
+                                <td id="res-day-unsung">-</td>
+                                <td id="res-month-unsung">-</td>
+                                <td id="res-year-unsung">-</td>
+                            </tr>
+                            <tr class="jijanggan-row">
+                                <td class="row-label">지장간</td>
+                                <td id="res-hour-jijanggan">-</td>
+                                <td id="res-day-jijanggan">-</td>
+                                <td id="res-month-jijanggan">-</td>
+                                <td id="res-year-jijanggan">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 오행 분포 바 -->
+                <div class="oheng-distribution">
+                    <div class="dist-header">
+                        <span>오행(五行) 분포 비율</span>
+                    </div>
+                    <div class="dist-bars">
+                        <div class="dist-item"><span class="o-dot o-wood"></span> 목(木): <strong id="o-wood-cnt">0</strong></div>
+                        <div class="dist-item"><span class="o-dot o-fire"></span> 화(火): <strong id="o-fire-cnt">0</strong></div>
+                        <div class="dist-item"><span class="o-dot o-earth"></span> 토(土): <strong id="o-earth-cnt">0</strong></div>
+                        <div class="dist-item"><span class="o-dot o-metal"></span> 금(金): <strong id="o-metal-cnt">0</strong></div>
+                        <div class="dist-item"><span class="o-dot o-water"></span> 수(水): <strong id="o-water-cnt">0</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 세계 영성 융합 분석: 칼 융 원형 & 에너지 오라 & 주역 64괘 -->
+            <div class="result-block three-cols">
+                <div class="info-card">
+                    <div class="card-icon-badge">JUNG</div>
+                    <h3 class="card-sub-title">칼 융 12대 심리 원형</h3>
+                    <div id="res-archetype-tag" class="status-tag">영웅</div>
+                    <h4 id="res-archetype-title" class="status-heading">영웅 (The Hero)</h4>
+                    <p id="res-archetype-desc" class="status-p"></p>
+                    <div class="shadow-box">
+                        <span class="shadow-label">무의식 속 그림자(Shadow):</span>
+                        <p id="res-shadow-desc" class="shadow-text"></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon-badge">AURA</div>
+                    <h3 class="card-sub-title">7대 차크라 에너지 오라</h3>
+                    <div id="res-aura-tag" class="status-tag">에메랄드</div>
+                    <h4 id="res-aura-title" class="status-heading">Emerald Aura</h4>
+                    <p id="res-aura-desc" class="status-p"></p>
+                    <div id="res-chakra-list" class="chakra-mini-list"></div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon-badge">易經</div>
+                    <h3 class="card-sub-title">주역(I-Ching) 64괘 영동</h3>
+                    <div id="res-iching-tag" class="status-tag">화천대유</div>
+                    <h4 id="res-iching-title" class="status-heading">火天大有</h4>
+                    <p id="res-iching-desc" class="status-p"></p>
+                </div>
+            </div>
+
+            <!-- 3. 음양 체질 & 육감 6대 지표 헥사곤 & 4대 영적 문 -->
+            <div class="result-block two-cols">
+                <div class="info-card chart-card">
+                    <h3 class="card-sub-title">육감(六感) 6대 지표</h3>
+                    <p class="chart-desc">사주팔자 신살과 오행 편중으로 산출된 6대 영적 감각</p>
+                    <div class="radar-container">
+                        <svg id="radar-svg" viewBox="0 0 320 320" class="radar-svg">
+                            <!-- JS에서 레이더 차트 동적 렌더링 -->
+                        </svg>
+                    </div>
+                    <div id="six-senses-list" class="senses-list"></div>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="card-sub-title">사주에 열린 4대 영적 문 (門)</h3>
+                    <p class="chart-desc">보이지 않는 세계와 감응하는 통로 (최대 4개)</p>
+                    <div id="gates-list" class="gates-container"></div>
+                </div>
+            </div>
+
+            <!-- 3.5. 황실 비전 자미두수(紫微斗數) 12궁 성반 및 14대 주성 투시 -->
+            <div id="ziwei-section" class="result-block ziwei-block">
+                <div class="ziwei-header">
+                    <div class="ziwei-badge">🌌 황실 비전(皇室秘傳) 천문 점성술</div>
+                    <h2 class="block-title"><span>紫微斗數</span> 자미두수 12궁 성반(星盤) & 14대 주성</h2>
+                    <p class="ziwei-sub-desc">북극성을 상징하는 제왕의 별 자미성(紫微星)을 필두로, 하늘의 14개 주성과 12개 인생 궁(宮)을 입체 투시한 황실의 운명 지도입니다.</p>
+                </div>
+
+                <!-- 자미두수 핵심 요약 뱃지 바 -->
+                <div class="ziwei-summary-bar">
+                    <div class="ziwei-sum-item">
+                        <span class="z-label">오행국 (五行局)</span>
+                        <strong id="zw-bureau" class="z-val">-</strong>
+                    </div>
+                    <div class="ziwei-sum-item">
+                        <span class="z-label">명궁 (命宮) 위치</span>
+                        <strong id="zw-ming-loc" class="z-val">-</strong>
+                    </div>
+                    <div class="ziwei-sum-item">
+                        <span class="z-label">명궁 좌정 주성</span>
+                        <strong id="zw-ming-stars" class="z-val z-highlight">-</strong>
+                    </div>
+                    <div class="ziwei-sum-item">
+                        <span class="z-label">신궁 (身宮) 후천운</span>
+                        <strong id="zw-shen-loc" class="z-val">-</strong>
+                    </div>
+                    <div class="ziwei-sum-item">
+                        <span class="z-label">화기(化忌) 숙명 시련</span>
+                        <strong id="zw-hwayi-loc" class="z-val z-danger">-</strong>
+                    </div>
+                </div>
+
+                <!-- 도인의 자미두수 성반 칙명 -->
+                <div class="ziwei-oracle-card">
+                    <div class="oracle-sub-tag">📜 현허도인의 자미 성반 천기 직설:</div>
+                    <p id="zw-oracle-text" class="zw-oracle-p"></p>
+                </div>
+
+                <!-- 12궁 성반 그리드 -->
+                <div class="ziwei-palaces-grid" id="zw-palaces-grid">
+                    <!-- JS에서 12궁 동적 렌더링 -->
+                </div>
+            </div>
+
+            <!-- 4. 11개 챕터 풀이 (총 10편 52장 체계 & 페이월 락킹) -->
+            <div class="result-block">
+                <div class="chapters-header">
+                    <h2 class="block-title"><span>十篇五十二張</span> 현허도인의 11대 천기 핵심 풀이</h2>
+                    <p class="chapters-sub">각 영역을 누르면 도인의 깊은 직설 풀이와 <strong>【잘 풀렸을 때 천운 vs 안 풀렸을 때 악운】</strong>의 극단적 대조를 확인할 수 있습니다.</p>
+                </div>
+
+                <!-- 카테고리 필터 탭 -->
+                <div class="category-tabs">
+                    <button class="cat-btn active" data-cat="all">전체보기</button>
+                    <button class="cat-btn" data-cat="나">나 (魂·鬼·欲)</button>
+                    <button class="cat-btn" data-cat="애정">애정 (情·劫·緣)</button>
+                    <button class="cat-btn" data-cat="재물">재물 (財)</button>
+                    <button class="cat-btn" data-cat="직업">직업 (業)</button>
+                    <button class="cat-btn" data-cat="건강">건강 (體)</button>
+                    <button class="cat-btn" data-cat="미래">미래 (運)</button>
+                    <button class="cat-btn" data-cat="갈림길">갈림길 (命)</button>
+                </div>
+
+                <!-- 11개 아코디언 카드 컨테이너 -->
+                <div id="chapters-container" class="chapters-accordion"></div>
+
+                <!-- VIP 페이월 결제 유도 배너 (연 10억 수익 엔진) -->
+                <div id="vip-paywall-banner" class="vip-paywall-card">
+                    <div class="paywall-sparkle">👑 VIP 특별 할인 한정 혜택</div>
+                    <h3 class="paywall-title">당신의 타고난 억대 재물 창고와 인생 전성기 전체 풀이 열기</h3>
+                    <p class="paywall-desc">재물(財), 직업/이직(業), 건강(體), 대운 황금기(運), 운명의 갈림길(命) 52장 완전판 보고서</p>
+                    
+                    <div class="price-row">
+                        <span class="original-price">49,000원</span>
+                        <span class="sale-price">19,800원</span>
+                        <span class="discount-badge">60% 할인</span>
+                    </div>
+
+                    <button type="button" id="open-paywall-btn" class="paywall-cta-btn">
+                        <span>지금 19,800원으로 평생 열람권 즉시 잠금 해제</span>
+                    </button>
+                    <p class="paywall-guarantee">🔒 결제 즉시 모든 잠긴 챕터가 100% 영구 공개됩니다.</p>
+                </div>
+            </div> <!-- end #result-detailed-mode -->
+
+            <!-- 하단 액션 버튼 -->
+            <div class="bottom-actions">
+                <button type="button" id="bottom-restart-btn" class="action-btn secondary btn-restart">🔄 다른 사주 다시 보기</button>
+                <button type="button" id="bottom-print-btn" class="action-btn primary btn-print">🖨️ 감명서 인쇄 및 저장</button>
+            </div>
+        </section>
+
+        <!-- VIP 결제 시뮬레이션 모달 -->
+        <div id="paywall-modal" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-close" id="modal-close-btn">✕</div>
+                <div class="modal-header">
+                    <div class="modal-badge">VIP PREMIUM UNLOCK</div>
+                    <h3 class="modal-title">현허도인 천명 신점사주 평생 열람권</h3>
+                    <p class="modal-sub">1회 결제로 평생 무제한 열람 및 PDF 저장 권한 부여</p>
+                </div>
+                <div class="modal-body">
+                    <div class="order-summary">
+                        <div class="summary-item">
+                            <span>상품명</span>
+                            <strong>현허도인 천명 신점사주 11편 52장 전체 리포트</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>특별 할인가</span>
+                            <strong class="gold-text">19,800원</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>결제 수단</span>
+                            <span>네이버페이 / 카카오페이 / 신용카드</span>
+                        </div>
+                    </div>
+                    <button type="button" id="simulate-pay-btn" class="modal-pay-btn">
+                        💳 19,800원 결제 완료 및 잠금 해제 (시뮬레이션)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 부적 캔버스 다운로드 모달 -->
+        <div id="amulet-modal" class="modal-overlay hidden">
+            <div class="modal-card amulet-modal-card">
+                <div class="modal-close" id="amulet-close-btn">✕</div>
+                <h3 class="modal-title">🎴 현허도인 맞춤 만사형통 황금 부적 카드</h3>
+                <p class="modal-sub">스마트폰에 저장하거나 SNS(인스타/카톡)에 공유하여 만복을 불러오세요.</p>
+                <div class="canvas-wrapper">
+                    <canvas id="amulet-canvas" width="400" height="600"></canvas>
+                </div>
+                <button type="button" id="save-canvas-btn" class="modal-pay-btn">
+                    💾 부적 이미지 스마트폰에 저장하기
+                </button>
+            </div>
+        </div>
+
+        <!-- 출석 스탬프 리텐션 모달 (다크사주 벤치마킹 100% 흡수) -->
+        <div id="stamp-modal" class="modal-overlay hidden">
+            <div class="modal-card stamp-modal-card">
+                <div class="modal-close" id="stamp-close-btn">✕</div>
+                <div class="modal-header">
+                    <div class="modal-badge stamp-badge">DAILY ATTENDANCE REWARD</div>
+                    <h3 class="modal-title">📅 매일 천기 출석 스탬프</h3>
+                    <p class="modal-sub">매일 1회 출석 도장을 찍으세요. <strong>스탬프 2개당 1:1 천기 심층 문답 1회권(1,200원 상당)</strong>을 즉시 지급합니다!</p>
+                </div>
+                
+                <div class="stamp-status-banner">
+                    <div class="stamp-ticket-box">
+                        <span>현재 보유 문답권:</span>
+                        <strong id="modal-ticket-count" class="gold-text">0장</strong>
+                    </div>
+                    <div class="stamp-fomo-timer">
+                        ⏳ 오늘 획득 보상권 만료까지: <span id="stamp-fomo-countdown">23:59:59</span> 남음
+                    </div>
+                </div>
+
+                <div class="stamp-calendar-grid" id="stamp-calendar-grid">
+                    <!-- JS에서 28일/30일 스탬프 셀 동적 생성 -->
+                </div>
+
+                <div class="stamp-action-area">
+                    <button type="button" id="btn-do-stamp" class="modal-pay-btn stamp-stamp-btn">
+                        💮 오늘의 출석 도장 찍기
+                    </button>
+                    <p class="stamp-guide-note">※ 출석 도장은 매일 자정(00:00)에 갱신되며, 질문권은 1:1 천기 문답소에서 즉시 사용 가능합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- [오리지널 수묵 시네마틱 웹툰 모달] 표절 0% 천명루 현허도인 개안 서사 -->
+        <div id="webtoon-modal" class="modal-overlay hidden">
+            <div class="modal-card webtoon-modal-card">
+                <div class="modal-close" id="webtoon-close-btn">✕ 건너뛰기</div>
+                <div class="webtoon-scroll-container">
+                    <!-- 컷 1 -->
+                    <div class="webtoon-cut cut-1">
+                        <div class="cut-bg-overlay"></div>
+                        <div class="cut-visual-art rain-city-art">
+                            <div class="ink-rain"></div>
+                            <div class="city-silhouettes"></div>
+                            <div class="wanderer-silhouette"></div>
+                        </div>
+                        <div class="cut-narrative-box">
+                            <span class="cut-num">第 一 幕 : 濁世 (탁세)</span>
+                            <p class="cut-text">비 내리는 도심의 차가운 빌딩 숲...<br>풀리지 않는 빚과 상처뿐인 인연에 짓눌려, 그대는 길을 잃고 비틀거리고 있었다.</p>
+                        </div>
+                    </div>
+
+                    <!-- 컷 2 -->
+                    <div class="webtoon-cut cut-2">
+                        <div class="cut-bg-overlay"></div>
+                        <div class="cut-visual-art mountain-temple-art">
+                            <div class="ink-mist"></div>
+                            <div class="temple-silhouette"></div>
+                            <div class="red-lantern-glow"></div>
+                        </div>
+                        <div class="cut-narrative-box">
+                            <span class="cut-num">第 二 幕 : 異界 (이계)</span>
+                            <p class="cut-text">짙은 안개 낀 산자락 너머, 붉은 청사초롱 불빛 하나.<br>천 년의 시간을 머금은 흑와 전각 <strong>【천명루(天命樓)】</strong>의 육중한 문이 서서히 열린다.</p>
+                        </div>
+                    </div>
+
+                    <!-- 컷 3 -->
+                    <div class="webtoon-cut cut-3">
+                        <div class="cut-bg-overlay"></div>
+                        <div class="cut-visual-art shaman-room-art">
+                            <div class="candle-flames"></div>
+                            <div class="master-draped-art"></div>
+                            <div class="spirit-eyes-glow"></div>
+                        </div>
+                        <div class="cut-narrative-box">
+                            <span class="cut-num">第 三 幕 : 靈眼 (영안)</span>
+                            <p class="cut-text">촛불 그림자 사이, 도포를 두르고 앉은 백발의 노인.<br>천기를 꿰뚫어 보는 서늘한 눈빛의 <strong>【현허도인(玄虛道人)】</strong>이 찻잔을 든 채 그대를 응시한다.</p>
+                        </div>
+                    </div>
+
+                    <!-- 컷 4 -->
+                    <div class="webtoon-cut cut-4">
+                        <div class="cut-bg-overlay"></div>
+                        <div class="cut-narrative-box dialogue-box">
+                            <span class="cut-num">第 四 幕 : 勅命 (칙명)</span>
+                            <div class="master-speech-bubble">
+                                "가슴에 시퍼런 비수를 품고 온 자가 누군가 했더니...<br>전생의 업보와 흉살이 이리도 무겁게 그대를 짓누르고 있었더냐.<br><br>
+                                <strong>이리 가까이 오너라. 네 타고난 사주팔자와 하늘의 별을 비추어,<br>막힌 곳간을 뚫고 진짜 인연을 찾아주마.</strong>"
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 컷 5 (인터랙티브 개안 터치) -->
+                    <div class="webtoon-cut cut-5">
+                        <div class="cut-visual-art mirror-altar-art">
+                            <div class="mystic-mirror-frame">
+                                <div class="mirror-surface-glow"></div>
+                                <span class="mirror-symbol">明鏡</span>
+                            </div>
+                        </div>
+                        <div class="cut-action-area">
+                            <p class="mirror-guide-p">※ 도인의 신비로운 거울을 들여다보고 타고난 천명을 밝히십시오.</p>
+                            <button type="button" id="btn-enter-saju-from-webtoon" class="enter-saju-btn">
+                                🪞 현허도인의 천명 거울(明鏡)을 들여다본다
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <footer class="main-footer">
+            <p>© 天命明鏡 (천명명경) | 동양 정통 명리학 & 현허도인 천기 신점 × 글로벌 영성 융합 체계</p>
+        </footer>
+    </div>
+
+    <!-- 토스트 알림 컴포넌트 -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- 모바일 전용 엄지손가락(Thumb Zone) 플로팅 퀵 액션 바 -->
+    <div id="mobile-floating-bar" class="mobile-floating-bar hidden">
+        <button type="button" id="mfb-share-insta" class="mfb-btn insta" title="인스타 스토리 공유">
+            <span class="mfb-icon">📸</span>
+            <span class="mfb-label">인스타 공유</span>
+        </button>
+        <button type="button" id="mfb-share-kakao" class="mfb-btn kakao" title="카카오톡 친구 공유">
+            <span class="mfb-icon">💬</span>
+            <span class="mfb-label">카톡 공유</span>
+        </button>
+        <button type="button" id="mfb-scroll-top" class="mfb-btn top" title="맨 위로 가기">
+            <span class="mfb-icon">⬆️</span>
+            <span class="mfb-label">맨 위로</span>
+        </button>
+    </div>
+
+    <script src="app.js?v=20261001_v7_mobile"></script>
+    <script>
+        // 코드 변경 시 브라우저 자동 실시간 갱신 (Live Auto-Reload)
+        let currentMtime = null;
+        setInterval(async () => {
+            try {
+                const res = await fetch('/api/version');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (currentMtime === null) {
+                        currentMtime = data.mtime;
+                    } else if (currentMtime !== data.mtime) {
+                        console.log("새로운 소스코드 감지 -> 화면 자동 리로드 실행");
+                        window.location.reload(true);
+                    }
+                }
+            } catch (err) {}
+        }, 1200);
+    </script>
+</body>
+</html>
