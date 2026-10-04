@@ -1,0 +1,2 @@
+# 天命明鏡 (천명명경) Vercel Serverless Requirements
+# 표준 내장 라이브러리(math, datetime, json, http.server) 기반으로 무의존성 경량 설계
