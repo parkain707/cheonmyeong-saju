@@ -1296,9 +1296,11 @@
                 <p class="modal-sub">스마트폰에 저장하거나 SNS(인스타/카톡)에 공유하여 만복을 불러오세요.</p>
                 <div class="canvas-wrapper">
                     <canvas id="amulet-canvas" width="400" height="600"></canvas>
+                    <img id="amulet-preview-img" style="display:none; width:100%; max-width:320px; margin:0 auto; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.5);" alt="천기 부적 카드">
                 </div>
-                <button type="button" id="save-canvas-btn" class="modal-pay-btn">
-                    💾 부적 이미지 스마트폰에 저장하기
+                <p id="amulet-mobile-hint" style="display:none; font-size:12px; color:var(--gold-light); margin-top:8px; text-align:center;">💡 모바일 브라우저에서는 위 이미지를 <strong>길게 꾹 눌러 '이미지 저장'</strong>하실 수도 있습니다.</p>
+                <button type="button" id="save-canvas-btn" class="modal-pay-btn" style="margin-top:12px;">
+                    📥 부적 이미지 저장 / 공유하기
                 </button>
             </div>
         </div>
@@ -1439,7 +1441,7 @@
         </button>
     </div>
 
-    <script src="app.js?v=20261001_v7_mobile"></script>
+    <script src="app.js?v=20261005_btn_resilience"></script>
     <script>
         // 코드 변경 시 브라우저 자동 실시간 갱신 (Live Auto-Reload)
         let currentMtime = null;

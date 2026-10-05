@@ -67,6 +67,59 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // 범용 공유 & 클립보드 복사 헬퍼 (모바일 사파리/인앱 브라우저/PC 100% 무결점 대응)
+    async function universalShareOrCopy({ title = "천명명경 (天命明鏡)", text = "", url = window.location.href, toastMsg = "📋 클립보드에 복사되었습니다!" }) {
+        triggerHaptic(20);
+        // 1. Web Share API (모바일 네이티브 공유창: 카톡/인스타/에어드롭/메시지/복사 등)
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: title,
+                    text: text,
+                    url: url
+                });
+                showToast("✨ 공유가 완료되었습니다!");
+                return true;
+            } catch (err) {
+                if (err.name === "AbortError") return false; // 사용자가 공유창을 직접 취소함
+            }
+        }
+
+        // 2. 최신 Clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            try {
+                await navigator.clipboard.writeText(text);
+                if (toastMsg) showToast(toastMsg);
+                return true;
+            } catch (err) {}
+        }
+
+        // 3. Fallback: 숨겨진 textarea + execCommand
+        try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            ta.style.top = "0";
+            ta.setAttribute("readonly", "");
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            if (ok) {
+                if (toastMsg) showToast(toastMsg);
+                return true;
+            }
+        } catch (e) {}
+
+        // 4. 최종 Fallback: prompt
+        if (text) {
+            prompt("아래 내용을 길게 눌러 복사하세요:", text);
+        }
+        return true;
+    }
+
     // 1. 성별 칩 클릭
     const genderChips = document.querySelectorAll('.select-chip[data-group="gender"]');
     genderChips.forEach(chip => {
@@ -330,6 +383,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
                 localStorage.setItem("soul_memory", JSON.stringify(soulMemory));
             } catch (e) { /* localStorage 미지원 환경 무시 */ }
+
+            if (data && data.is_unlocked) {
+                isVipUnlocked = true;
+            }
 
             setTimeout(() => {
                 try {
@@ -708,16 +765,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const btnKakao = document.getElementById("btn-share-kakao");
 
         const copyShareText = () => {
-            const shareText = mzInsight.viral_share_text || "2030 천명 스펙 카드";
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast("📸 [2030 천명 스펙 카드] 클립보드에 복사 완료! 인스타 스토리/카톡에 붙여넣으세요!");
-                }).catch(() => {
-                    prompt("아래 텍스트를 복사하여 공유하세요:", shareText);
-                });
-            } else {
-                prompt("아래 텍스트를 복사하여 공유하세요:", shareText);
-            }
+            const shareText = (mzInsight && mzInsight.viral_share_text) ? mzInsight.viral_share_text : "2030 천명 스펙 카드";
+            universalShareOrCopy({
+                title: "2030 천명 스펙 카드",
+                text: shareText,
+                toastMsg: "📸 [2030 천명 스펙 카드] 복사 완료! 인스타 스토리/카톡에 붙여넣으세요!"
+            });
         };
 
         if (btnInsta) btnInsta.onclick = copyShareText;
@@ -862,10 +915,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     `).join("");
                 }
 
-                // 바둑알 탭 버튼 인터랙션
+                // 바둑알 탭 버튼 인터랙션 (웹툰 모드 스코프 한정)
                 const wtBadukChips = document.querySelectorAll(".wt-baduk-bar .baduk-chip");
                 wtBadukChips.forEach(chip => {
                     chip.onclick = () => {
+                        triggerHaptic(18);
                         wtBadukChips.forEach(c => c.classList.remove("active"));
                         chip.classList.add("active");
                         const targetIdx = chip.dataset.target;
@@ -1079,10 +1133,11 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `).join("");
 
-        // 바둑알 탭 인터랙션
-        const chips = document.querySelectorAll(".baduk-chip");
+        // 바둑알 탭 인터랙션 (상세 분석 뷰 스코프 한정)
+        const chips = document.querySelectorAll(".destiny-baduk-bar .baduk-chip");
         chips.forEach(chip => {
             chip.onclick = () => {
+                triggerHaptic(18);
                 chips.forEach(c => c.classList.remove("active"));
                 chip.classList.add("active");
                 const targetIdx = chip.dataset.target;
@@ -1381,14 +1436,76 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillStyle = "#5c4015";
         ctx.fillText("동양 정통 명리학 & 현허도인 천기 신점", w / 2, 555);
         ctx.fillText("© 天命明鏡 (천명명경)", w / 2, 575);
+
+        // 모바일 사파리/웹뷰 전용 프리뷰 갱신
+        const previewImg = document.getElementById("amulet-preview-img");
+        const mobileHint = document.getElementById("amulet-mobile-hint");
+        const dataUrl = amuletCanvas.toDataURL("image/png");
+        if (previewImg) {
+            previewImg.src = dataUrl;
+            previewImg.style.display = "block";
+        }
+        if (mobileHint) mobileHint.style.display = "block";
     }
 
-    saveCanvasBtn.addEventListener("click", () => {
-        const link = document.createElement("a");
-        link.download = `현허도인_천기부적_${currentUserName}.png`;
-        link.href = amuletCanvas.toDataURL("image/png");
-        link.click();
-    });
+    // 모바일/PC 100% 무결점 부적 다운로드 및 공유
+    if (saveCanvasBtn) {
+        saveCanvasBtn.addEventListener("click", async () => {
+            triggerHaptic(25);
+            const fileName = `현허도인_천기부적_${currentUserName || '명주'}.png`;
+            const dataUrl = amuletCanvas.toDataURL("image/png");
+
+            // 1. 모바일 Web Share API로 파일 직접 전송/저장 시도
+            if (navigator.share && navigator.canShare && amuletCanvas.toBlob) {
+                try {
+                    amuletCanvas.toBlob(async (blob) => {
+                        if (blob) {
+                            const file = new File([blob], fileName, { type: "image/png" });
+                            if (navigator.canShare({ files: [file] })) {
+                                try {
+                                    await navigator.share({
+                                        files: [file],
+                                        title: "현허도인 천기 황금부적",
+                                        text: `[${currentUserName || '명주'}] 님의 액운소멸 & 개운 황금부적`
+                                    });
+                                    showToast("✨ 부적이 성공적으로 저장/공유되었습니다!");
+                                    return;
+                                } catch (shareErr) {
+                                    if (shareErr.name === "AbortError") return;
+                                }
+                            }
+                        }
+                        fallbackSaveAmulet(dataUrl, fileName);
+                    }, "image/png");
+                    return;
+                } catch (e) {}
+            }
+
+            fallbackSaveAmulet(dataUrl, fileName);
+        });
+    }
+
+    function fallbackSaveAmulet(dataUrl, fileName) {
+        const previewImg = document.getElementById("amulet-preview-img");
+        const mobileHint = document.getElementById("amulet-mobile-hint");
+        if (previewImg) {
+            previewImg.src = dataUrl;
+            previewImg.style.display = "block";
+        }
+        if (mobileHint) mobileHint.style.display = "block";
+
+        try {
+            const link = document.createElement("a");
+            link.download = fileName;
+            link.href = dataUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("📥 부적 다운로드를 시도했습니다! (모바일은 위 이미지를 꾹 눌러 저장)");
+        } catch (err) {
+            showToast("💡 위 부적 이미지를 길게 꾹 눌러 '이미지 저장'을 선택하세요!");
+        }
+    }
 
     // ==========================================================================
     // 2대 뷰 모드 스위처 & 버튼 전수 바인딩 (Sentinel & Cipher 안전망 구축)
@@ -1400,6 +1517,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSwitchToDetailed = document.getElementById("btn-switch-to-detailed");
 
     function switchResultView(mode) {
+        triggerHaptic(18);
         if (mode === "webtoon") {
             if (btnViewWebtoon) btnViewWebtoon.classList.add("active");
             if (btnViewDetailed) btnViewDetailed.classList.remove("active");
@@ -1421,10 +1539,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (btnSwitchToDetailed) {
         btnSwitchToDetailed.addEventListener("click", () => {
+            triggerHaptic(20);
             switchResultView("detailed");
-            if (resultDetailedMode) {
-                resultDetailedMode.scrollIntoView({ behavior: "smooth" });
-            }
+            setTimeout(() => {
+                if (resultDetailedMode) {
+                    resultDetailedMode.scrollIntoView({ behavior: "smooth" });
+                }
+            }, 60);
         });
     }
 
@@ -1456,10 +1577,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 `• 현허도인 칙명: ${cachedReading && cachedReading.sections && cachedReading.sections[10] ? cachedReading.sections[10].desc.slice(0, 120) : ''}...\n\n` +
                 `© 天命明鏡 현허도인 천기 신점`;
 
-            navigator.clipboard.writeText(summaryText).then(() => {
-                if (showToastFlag) showToast("📋 감명 요약이 클립보드에 복사되었습니다!");
-            }).catch(() => {
-                if (showToastFlag) showToast("클립보드 복사에 실패했습니다.");
+            universalShareOrCopy({
+                title: "천명명경 사주 신점 감명 요약",
+                text: summaryText,
+                toastMsg: showToastFlag ? "📋 감명 요약이 클립보드에 복사되었습니다!" : ""
             });
         } catch (err) {
             if (showToastFlag) showToast("복사 중 오류가 발생했습니다.");
@@ -1475,10 +1596,15 @@ document.addEventListener("DOMContentLoaded", () => {
     allPrintBtns.forEach(btn => {
         btn.addEventListener("click", (e) => {
             e.preventDefault();
+            triggerHaptic(20);
             showToast("🖨️ 현허도인의 천기 감명서 인쇄 및 저장을 준비합니다...");
             copySajuSummaryToClipboard(false); // 백업 자동 복사
             setTimeout(() => {
-                window.print();
+                try {
+                    window.print();
+                } catch (err) {
+                    showToast("📋 인쇄가 지원되지 않는 환경이므로 감명 요약이 클립보드에 복사되었습니다!");
+                }
             }, 300);
         });
     });
@@ -1488,6 +1614,12 @@ document.addEventListener("DOMContentLoaded", () => {
     allRestartBtns.forEach(btn => {
         btn.addEventListener("click", (e) => {
             e.preventDefault();
+            triggerHaptic(20);
+            cachedGlobal = null;
+            cachedSaju = null;
+            cachedReading = null;
+            cachedSpirit = null;
+            cachedZiwei = null;
             if (resultSection) resultSection.classList.add("hidden");
             if (inputSection) inputSection.classList.remove("hidden");
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1603,12 +1735,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. 2인 사주 교차 궁합실 로직
     let selectedRelation = "dating";
-    const relationChips = document.querySelectorAll(".relation-chip");
+    const relationChips = document.querySelectorAll(".rel-chip, .relation-chip");
     relationChips.forEach(chip => {
         chip.addEventListener("click", () => {
+            triggerHaptic(18);
             relationChips.forEach(c => c.classList.remove("active"));
             chip.classList.add("active");
-            selectedRelation = chip.dataset.relation || "dating";
+            selectedRelation = chip.dataset.rel || chip.dataset.relation || "dating";
         });
     });
 
@@ -1616,6 +1749,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const miniChips = document.querySelectorAll(".mini-chip");
     miniChips.forEach(chip => {
         chip.addEventListener("click", () => {
+            triggerHaptic(18);
             const targetId = chip.dataset.target;
             const targetInput = document.getElementById(targetId);
             if (targetInput) {
@@ -1724,6 +1858,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const qaModeChips = document.querySelectorAll(".qa-mode-chip");
     qaModeChips.forEach(chip => {
         chip.addEventListener("click", () => {
+            triggerHaptic(18);
             qaModeChips.forEach(c => c.classList.remove("active"));
             chip.classList.add("active");
             selectedQaMode = chip.dataset.mode || "single";
@@ -1735,6 +1870,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const qaInputText = document.getElementById("qa-input-text");
     presetChips.forEach(chip => {
         chip.addEventListener("click", () => {
+            triggerHaptic(18);
             if (qaInputText) {
                 qaInputText.value = chip.textContent.trim();
                 qaInputText.focus();
@@ -2101,16 +2237,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mfbShareInsta) {
         mfbShareInsta.addEventListener("click", () => {
             triggerHaptic(30);
-            const btn = document.getElementById("btn-share-instagram");
-            if (btn) btn.click();
+            const shareText = (cachedGlobal && cachedGlobal.mz_insight && cachedGlobal.mz_insight.viral_share_text)
+                ? cachedGlobal.mz_insight.viral_share_text
+                : "2030 천명 스펙 카드";
+            universalShareOrCopy({
+                title: "2030 천명 스펙 카드 (Instagram)",
+                text: shareText,
+                toastMsg: "📸 [2030 천명 스펙 카드] 클립보드 복사 완료! 인스타 스토리/DM에 공유하세요!"
+            });
         });
     }
 
     if (mfbShareKakao) {
         mfbShareKakao.addEventListener("click", () => {
             triggerHaptic(30);
-            const btn = document.getElementById("btn-share-kakao");
-            if (btn) btn.click();
+            const shareText = (cachedGlobal && cachedGlobal.mz_insight && cachedGlobal.mz_insight.viral_share_text)
+                ? cachedGlobal.mz_insight.viral_share_text
+                : "2030 천명 스펙 카드";
+            universalShareOrCopy({
+                title: "2030 천명 스펙 카드 (KakaoTalk)",
+                text: shareText,
+                toastMsg: "💬 [2030 천명 스펙 카드] 클립보드 복사 완료! 카카오톡 대화방에 공유하세요!"
+            });
         });
     }
 });
